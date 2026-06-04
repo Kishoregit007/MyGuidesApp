@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Wealth-Building Master Plan — Age 36, India</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #0E0C09;
+  --gold: #B8861A;
+  --gold2: #D4A82A;
+  --gold-pale: #F9F3E3;
+  --cream: #FAF8F2;
+  --cream2: #F2EDE0;
+  --mid: #5C5140;
+  --muted: #9A8B73;
+  --rule: #D4C9A8;
+  --red: #8B2020;
+  --green: #1A4D2E;
+  --blue: #1A2E4D;
+  --paper: #FDFAF4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── PRINT ── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+  .page-break { page-break-before: always; }
+  .phase-card { break-inside: avoid; }
+}
+
+/* ── WRAPPER ── */
+.document {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--paper);
+  box-shadow: 0 0 80px rgba(0,0,0,0.12);
+}
+
+/* ── COVER ── */
+.cover {
+  background: var(--ink);
+  padding: 70px 64px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(184,134,26,0.07) 39px, rgba(184,134,26,0.07) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(184,134,26,0.07) 39px, rgba(184,134,26,0.07) 40px);
+}
+.cover-inner { position: relative; z-index: 1; }
+.cover-badge {
+  display: inline-block;
+  border: 1px solid rgba(184,134,26,0.5);
+  color: var(--gold2);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  margin-bottom: 32px;
+}
+.cover h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.cover h1 em {
+  font-style: italic;
+  color: var(--gold2);
+}
+.cover-sub {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+  margin-bottom: 48px;
+}
+.cover-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(184,134,26,0.2);
+  border: 1px solid rgba(184,134,26,0.2);
+}
+.cover-stat {
+  background: rgba(255,255,255,0.03);
+  padding: 20px 18px;
+  text-align: center;
+}
+.cover-stat .val {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold2);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cover-stat .lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.cover-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(184,134,26,0.2);
+}
+.cover-meta-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.cover-meta-item span { color: rgba(255,255,255,0.7); display: block; margin-top: 2px; }
+
+/* ── SECTION LAYOUTS ── */
+.section {
+  padding: 52px 64px;
+  border-bottom: 1px solid var(--rule);
+}
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.section-intro {
+  font-size: 15.5px;
+  color: var(--mid);
+  font-style: italic;
+  line-height: 1.65;
+  margin-bottom: 32px;
+  max-width: 580px;
+}
+
+/* ── PHASE CARDS ── */
+.phase-card {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.phase-head {
+  display: flex;
+  align-items: stretch;
+  background: var(--cream2);
+}
+.phase-num {
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  flex-shrink: 0;
+  border-right: 1px solid var(--rule);
+}
+.p1 .phase-num { background: #E8F5E9; color: #1A4D2E; }
+.p2 .phase-num { background: #E3F2FD; color: #1A2E4D; }
+.p3 .phase-num { background: #FFF8E1; color: #7B5800; }
+.p4 .phase-num { background: #FCE4EC; color: #6B0F1A; }
+.p5 .phase-num { background: #EDE7F6; color: #3E1A6B; }
+
+.phase-head-text {
+  padding: 16px 20px;
+  flex: 1;
+}
+.phase-head-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--ink);
+}
+.phase-head-text .phase-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.phase-tag {
+  align-self: center;
+  margin-right: 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.p1 .phase-tag { background: #E8F5E9; color: #1A4D2E; }
+.p2 .phase-tag { background: #E3F2FD; color: #1A2E4D; }
+.p3 .phase-tag { background: #FFF8E1; color: #7B5800; }
+.p4 .phase-tag { background: #FCE4EC; color: #6B0F1A; }
+.p5 .phase-tag { background: #EDE7F6; color: #3E1A6B; }
+
+.phase-body {
+  padding: 24px 28px;
+  background: var(--paper);
+}
+.phase-steps { list-style: none; }
+.phase-steps li {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.phase-steps li:last-child { margin-bottom: 0; }
+.step-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-text strong { color: var(--ink); font-weight: 600; }
+.step-tip {
+  background: var(--gold-pale);
+  border-left: 3px solid var(--gold);
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--mid);
+  font-style: italic;
+  margin-top: 10px;
+  margin-left: 30px;
+  line-height: 1.6;
+}
+.step-tip strong { color: var(--gold); font-style: normal; }
+
+/* ── INSTRUMENTS TABLE ── */
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-top: 4px;
+}
+.inv-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid var(--rule);
+  background: var(--cream2);
+}
+.inv-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.inv-table tr:last-child td { border-bottom: none; }
+.inv-table tr:hover td { background: var(--cream2); }
+.inv-table td:first-child { font-weight: 600; }
+.risk {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.low { background: #E8F5E9; color: #1A4D2E; }
+.med { background: #FFF8E1; color: #7B5800; }
+.high { background: #FCE4EC; color: #6B0F1A; }
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--rule);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -31px;
+  top: 6px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+.tl-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.tl-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.tl-item p { font-size: 14px; color: var(--mid); line-height: 1.6; }
+
+/* ── ALLOCATION ── */
+.alloc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+.alloc-item { text-align: center; }
+.alloc-bar-wrap {
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.alloc-bar {
+  width: 36px;
+  border-radius: 2px 2px 0 0;
+  background: var(--gold);
+  opacity: 0.85;
+}
+.alloc-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.alloc-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── TAX BOX ── */
+.tax-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+.tax-card {
+  border: 1px solid var(--rule);
+  padding: 18px;
+  background: var(--cream2);
+  border-radius: 3px;
+}
+.tax-card .instrument {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.tax-card .limit {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.tax-card .desc { font-size: 13px; color: var(--mid); line-height: 1.5; }
+.total-save {
+  background: var(--ink);
+  color: #fff;
+  padding: 20px 24px;
+  margin-top: 14px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total-save .ts-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.total-save .ts-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold2);
+}
+
+/* ── TRAPS ── */
+.trap-list { display: flex; flex-direction: column; gap: 14px; }
+.trap-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--red);
+  background: var(--cream2);
+}
+.trap-icon { font-size: 20px; flex-shrink: 0; }
+.trap-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.trap-item p { font-size: 13.5px; color: var(--mid); line-height: 1.55; }
+
+/* ── CHECKLIST ── */
+.check-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.check-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  background: var(--cream2);
+  border-radius: 2px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.check-box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--rule);
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── AVOIDS ── */
+.avoid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.avoid-item {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #FFF0F0;
+  border: 1px solid #F4C2C2;
+  border-radius: 2px;
+  font-size: 13.5px;
+}
+.avoid-item .x { color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+/* ── CLOSING ── */
+.closing {
+  background: var(--ink);
+  padding: 52px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing::before {
+  content: '₹';
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-size: 300px;
+  color: rgba(184,134,26,0.05);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.closing blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+  max-width: 540px;
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 1;
+}
+.closing cite {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+  position: relative;
+  z-index: 1;
+}
+.closing .final-note {
+  margin-top: 28px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── PRINT BUTTON ── */
+.print-bar {
+  background: var(--ink);
+  padding: 14px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.print-bar-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.print-btn {
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  padding: 9px 22px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.print-btn:hover { background: var(--gold2); }
+
+/* ── DIVIDER ── */
+.ornament {
+  text-align: center;
+  color: var(--rule);
+  font-size: 18px;
+  letter-spacing: 8px;
+  margin: 8px 0 28px;
+}
+
+/* ── INTRO BOX ── */
+.intro-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+.intro-col {
+  padding: 24px 24px;
+  border-right: 1px solid var(--rule);
+}
+.intro-col:last-child { border-right: none; }
+.intro-col h4 {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.intro-col p { font-size: 14px; color: var(--mid); line-height: 1.65; }
+
+hr.rule { border: none; border-top: 1px solid var(--rule); margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<!-- PRINT BAR -->
+<div class="print-bar no-print">
+  <div class="print-bar-left">Wealth-Building Master Plan · Age 36 · India</div>
+  <button class="print-btn" onclick="window.print()">⬇ Download / Print PDF</button>
+</div>
+
+<div class="document">
+
+  <!-- ═══ COVER ═══ -->
+  <div class="cover">
+    <div class="cover-inner">
+      <div class="cover-badge">Personal Finance Blueprint · India · 2025</div>
+      <h1>Your Wealth-Building<br><em>Master Plan</em></h1>
+      <p class="cover-sub">A complete, realistic roadmap from zero to financial freedom — built for a 36-year-old Indian.</p>
+      <div class="cover-stats">
+        <div class="cover-stat"><div class="val">₹2–5 Cr</div><div class="lbl">Goal by age 56</div></div>
+        <div class="cover-stat"><div class="val">20–30%</div><div class="lbl">Income to save</div></div>
+        <div class="cover-stat"><div class="val">12–15%</div><div class="lbl">Expected CAGR</div></div>
+        <div class="cover-stat"><div class="val">5 Phases</div><div class="lbl">Clear milestones</div></div>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">Subject<span>Personal Wealth Building</span></div>
+        <div class="cover-meta-item">For<span>36-Year-Old Indian Male</span></div>
+        <div class="cover-meta-item">Horizon<span>20 Years (2025–2045)</span></div>
+        <div class="cover-meta-item">Instruments<span>MF · EPF · PPF · NPS · SGB</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 0: FOUNDATION ═══ -->
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <h2 class="section-title">Before You Invest a Single Rupee</h2>
+    <p class="section-intro">Wealth-building is not about picking the hottest stock. It is about laying a foundation so solid that no emergency, market crash, or life event can topple it. These two steps come before everything else.</p>
+
+    <div class="intro-box">
+      <div class="intro-col">
+        <h4>The Starting Mindset</h4>
+        <p>Starting at 36 is not late. It is 24 years before the standard Indian retirement age of 60. With disciplined compounding, ₹15,000/month started today becomes ₹2.5 Crore+ by age 56. The investor who starts at 36 and never stops beats the one who started at 22 and got distracted.</p>
+      </div>
+      <div class="intro-col">
+        <h4>The Non-Negotiable Sequence</h4>
+        <p>Do not skip steps. Insurance and an emergency fund are not optional — they are the walls that protect your compounding engine. A single hospitalization or job loss without these in place sets you back 3–5 years. The sequence is: Protect → Stabilise → Invest → Grow → Preserve.</p>
+      </div>
+    </div>
+
+    <div class="ornament">— ✦ —</div>
+
+    <!-- Phase 1 -->
+    <div class="phase-card p1">
+      <div class="phase-head">
+        <div class="phase-num">1</div>
+        <div class="phase-head-text">
+          <h3>Financial Foundation</h3>
+          <div class="phase-meta">Months 1–6 · Immediate Priority · Run Before Anything Else</div>
+        </div>
+        <div class="phase-tag">Emergency First</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-steps">
+          <li>
+            <span class="step-icon">🛡️</span>
+            <div class="step-text">
+              <strong>Build a 6-Month Emergency Fund.</strong> Before a single rupee goes into a mutual fund, save 6 months of total living expenses in a liquid account. If monthly expenses are ₹30,000 — save ₹1.8 Lakh minimum. This is your personal recession buffer: job loss, medical, family emergency — none of these should force you to break your investments.
+              <div class="step-tip"><strong>Where to park it:</strong> HDFC/SBI high-yield savings account or a liquid mutual fund on Paytm Money / Groww — both return 6.5–7.5% and allow same-day withdrawal. Never park emergency funds in equities.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">📊</span>
+            <div class="step-text">
+              <strong>Conduct a Net Worth Audit.</strong> On a single sheet of paper, list every asset (savings, FDs, gold, EPF, LIC policies, property) and every liability (home loan, car loan, personal loans, credit card balances). Subtract total liabilities from total assets. This is your real starting number — even if negative, knowing it gives you power over it.
+              <div class="step-tip"><strong>Hidden assets to check:</strong> Old PF accounts from previous employers (EPFO portal: epfindia.gov.in), dormant FDs, LIC policy surrender values, and Aadhaar-linked bank accounts via DigiLocker.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">💳</span>
+            <div class="step-text">
+              <strong>Eliminate All High-Interest Debt First.</strong> Any debt above 10% interest rate is mathematically destroying your wealth faster than any investment can create it. Credit cards (36–48% p.a.) and personal loans (14–24% p.a.) must be cleared before investing. Use the avalanche method: pay minimum on all debts, throw every extra rupee at the highest-rate debt first.
+              <div class="step-tip"><strong>Exception:</strong> Home loan at 8–9% is acceptable to carry — don't rush prepayment. But credit card rollover balance? Eliminate this month, not next.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">📋</span>
+            <div class="step-text">
+              <strong>Create a Zero-Based Monthly Budget.</strong> Every rupee of income gets assigned a purpose before the month begins. Framework: Fixed necessities (rent, EMIs, groceries, utilities) — max 50% of income. Savings and investments — minimum 20–30%. Lifestyle and discretionary — the remainder. Track using ET Money, Walnut App, or a simple spreadsheet. Review every month without fail.
+              <div class="step-tip"><strong>Key insight:</strong> At 36, every ₹1,000 saved and invested today becomes ₹8,000–10,000 in 20 years at 12% CAGR. The habit of tracking spending, once built, persists for life.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-card p2">
+      <div class="phase-head">
+        <div class="phase-num">2</div>
+        <div class="phase-head-text">
+          <h3>Protection Layer</h3>
+          <div class="phase-meta">Months 1–3 · Run Parallel with Phase 1 · Non-Negotiable</div>
+        </div>
+        <div class="phase-tag">Insurance First</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-steps">
+          <li>
+            <span class="step-icon">🏥</span>
+            <div class="step-text">
+              <strong>Health Insurance — ₹10–25 Lakh Cover.</strong> A single serious hospitalisation without insurance can wipe out 2–5 years of savings. At 36, a ₹10L family floater health policy costs ₹18,000–25,000/year. Add a super top-up to reach ₹25L total cover for an additional ₹5,000–8,000/year. This is the single best financial decision you can make today.
+              <div class="step-tip"><strong>Recommended policies:</strong> Niva Bupa ReAssure, Care Supreme, HDFC Ergo Optima Restore. Key features to demand: no claim bonus, restoration benefit, no room rent sub-limit, and direct cashless at major hospitals.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">🛡️</span>
+            <div class="step-text">
+              <strong>Term Life Insurance — 15–20x Annual Income.</strong> If you have dependents (spouse, children, parents), a pure term life cover is mandatory. A ₹1 Crore cover at age 36 costs only ₹12,000–18,000/year. Buy exclusively online — 30–40% cheaper than through agents. Never buy ULIPs or endowment plans as insurance substitutes — they are expensive products that do both jobs poorly.
+              <div class="step-tip"><strong>Recommended products:</strong> HDFC Click2Protect, Tata AIA Sampoorna Raksha, Max Life Smart Secure Plus. Buy online, choose a cover period until age 65, and add critical illness rider only if budget allows.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">📜</span>
+            <div class="step-text">
+              <strong>Evaluate and Possibly Surrender LIC Endowment Policies.</strong> If you hold an LIC Money Back, Jeevan Anand, or endowment plan, calculate its true internal rate of return — typically 4–5% p.a. — far below inflation. Compare the surrender value today vs. continuing until maturity. In many cases, surrendering and reinvesting in PPF + ELSS produces substantially better outcomes.
+              <div class="step-tip"><strong>Exception:</strong> If your policy matures within 2–3 years, continue it. The math changes near maturity as the exit penalty reduces. For policies with 7+ years remaining, reassess carefully with a fee-only financial advisor.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION: INVESTING ═══ -->
+  <div class="section page-break">
+    <div class="section-label">Core Wealth Engine</div>
+    <h2 class="section-title">Building Your Investment Portfolio</h2>
+    <p class="section-intro">Once the foundation is set, your money needs to work for you continuously — compounding silently in the background. These are the instruments that will build the bulk of your wealth over 20 years.</p>
+
+    <!-- Phase 3 -->
+    <div class="phase-card p3">
+      <div class="phase-head">
+        <div class="phase-num">3</div>
+        <div class="phase-head-text">
+          <h3>Core Investing Engine</h3>
+          <div class="phase-meta">Month 6 Onwards · Years 1–10 · Primary Wealth Builder</div>
+        </div>
+        <div class="phase-tag">Wealth Builder</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-steps">
+          <li>
+            <span class="step-icon">📈</span>
+            <div class="step-text">
+              <strong>Start SIPs in Mutual Funds — Your Primary Engine.</strong> Systematic Investment Plans in equity mutual funds are the most powerful wealth-building tool available to an Indian retail investor. The Nifty 50 index has returned 12–14% CAGR over every 15-year rolling period in history. Start with whatever amount you can — ₹2,000, ₹5,000, ₹10,000. Increase by 10% each January without fail.
+              <div class="step-tip"><strong>Recommended allocation:</strong> 40% Nifty 50 Index Fund + 30% Flexi Cap Fund + 30% Mid Cap Index Fund. Use direct plans only (no distributor commission) via Coin by Zerodha, ET Money, or Groww. Never use regular plans — the 1–1.5% annual difference costs you ₹30–50L over 20 years.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">🏢</span>
+            <div class="step-text">
+              <strong>Maximise EPF and Open a PPF Account.</strong> If employed, ensure your full EPF contribution is made each month (8.5% of basic + equal employer contribution). Separately, open a PPF account at any bank or post office and invest up to ₹1.5L per year. PPF gives 7.1% interest, fully tax-free under the EEE status — meaning the contribution, the interest earned, and the final withdrawal are all exempt from tax.
+              <div class="step-tip"><strong>Never withdraw EPF early.</strong> Early PF withdrawal is one of the most expensive financial mistakes Indians make. ₹3L in PF at 35 becomes ₹25L+ by retirement at 8.25% tax-free. Withdrawing for a car or home renovation destroys decades of compounding.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">📉</span>
+            <div class="step-text">
+              <strong>Open an NPS Account for Extra Tax Benefit.</strong> National Pension System (Tier 1) gives an additional ₹50,000 deduction under Section 80CCD(1B) — completely separate from the standard 80C limit. Investing ₹50,000/year saves ₹15,000–16,500 in taxes at the 30% slab while building a retirement corpus that grows tax-free. Choose 75% equity allocation (maximum allowed at age 36) for best long-term returns.
+              <div class="step-tip"><strong>Total tax deduction stack:</strong> 80C ₹1.5L + 80CCD(1B) NPS ₹50K + 80D health insurance ₹25K = ₹2.25L in deductions = ₹52,500–67,500 annual tax saving at 30% bracket.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">🪙</span>
+            <div class="step-text">
+              <strong>Gold via Sovereign Gold Bonds — 5–10% of Portfolio.</strong> Gold is a hedge, not a wealth creator. Keep 5–10% of your investable corpus in Sovereign Gold Bonds (SGBs) issued by the RBI — you get gold price appreciation PLUS 2.5% annual interest, and the maturity amount is completely tax-free. Never buy physical gold as an investment; making charges, storage, and purity risks destroy value.
+              <div class="step-tip"><strong>How to buy:</strong> SGBs are issued in tranches — check RBI announcements. Buy through your bank or stockbroker at ₹50/gram discount on online purchase. 8-year lock-in but tradeable on exchanges if you need early exit. SGB is the only gold investment that actually pays you to hold gold.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ALLOCATION CHART -->
+    <div style="margin-top:36px; margin-bottom:28px;">
+      <div class="section-label">Suggested Allocation</div>
+      <div style="font-size:13px; color:var(--muted); font-style:italic; margin-bottom:20px;">First 3 years — adjust as portfolio grows</div>
+      <div class="alloc-grid">
+        <div class="alloc-item">
+          <div class="alloc-bar-wrap"><div class="alloc-bar" style="height:100%; background:#B8861A;"></div></div>
+          <div class="alloc-pct">40%</div>
+          <div class="alloc-name">Equity<br>Mutual Funds</div>
+        </div>
+        <div class="alloc-item">
+          <div class="alloc-bar-wrap"><div class="alloc-bar" style="height:62.5%; background:#1A4D2E;"></div></div>
+          <div class="alloc-pct">25%</div>
+          <div class="alloc-name">EPF +<br>PPF</div>
+        </div>
+        <div class="alloc-item">
+          <div class="alloc-bar-wrap"><div class="alloc-bar" style="height:37.5%; background:#1A2E4D;"></div></div>
+          <div class="alloc-pct">15%</div>
+          <div class="alloc-name">Real<br>Estate</div>
+        </div>
+        <div class="alloc-item">
+          <div class="alloc-bar-wrap"><div class="alloc-bar" style="height:25%; background:#7B5800;"></div></div>
+          <div class="alloc-pct">10%</div>
+          <div class="alloc-name">Sovereign<br>Gold Bonds</div>
+        </div>
+        <div class="alloc-item">
+          <div class="alloc-bar-wrap"><div class="alloc-bar" style="height:25%; background:#5C5140;"></div></div>
+          <div class="alloc-pct">10%</div>
+          <div class="alloc-name">Debt<br>Mutual Funds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase-card p4">
+      <div class="phase-head">
+        <div class="phase-num">4</div>
+        <div class="phase-head-text">
+          <h3>Revenue Diversification</h3>
+          <div class="phase-meta">Years 2–7 · Build Extra Income Streams</div>
+        </div>
+        <div class="phase-tag">Income Multiplier</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-steps">
+          <li>
+            <span class="step-icon">💼</span>
+            <div class="step-text">
+              <strong>Grow Your Primary Income First.</strong> Your greatest wealth-building asset at 36 is your earning power. A 20% salary increase on ₹60,000/month adds ₹12,000/month — that is ₹1.44L/year more to invest, becoming ₹12L+ in 20 years at 12% CAGR. Invest aggressively in upskilling: professional certifications, strategic job switches, and building your professional network. In India, switching employers every 2–3 years yields 30–50% salary hikes vs. 8–10% annual increments.
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">🏠</span>
+            <div class="step-text">
+              <strong>Real Estate — One Smart Property.</strong> Buy a home for self-use in a growing Tier-2 city with a 20–25% down payment and an EMI below 35% of monthly income. Focus on end-use property with appreciation potential near IT parks, universities, or industrial growth corridors. Avoid under-construction projects unless the developer has RERA registration and a strong delivery track record.
+              <div class="step-tip"><strong>Yield reality check:</strong> Rental yield in India is only 2–3% — significantly below EPF and PPF. Real estate investment thesis must rely on capital appreciation, not rental income alone. Do the full math before buying any second property.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">💻</span>
+            <div class="step-text">
+              <strong>Build One Side Income Stream.</strong> Even ₹10,000/month extra = ₹1.2L/year that compounds powerfully over time. Choose a side income that leverages your existing professional skills: freelancing on Upwork or Toptal, consulting in your domain, online tutoring via Vedantu or Chegg, content creation, or a service-based micro-business. Service-based businesses need less capital and less time than product-based at this life stage.
+              <div class="step-tip"><strong>Target:</strong> ₹10,000/month from a side hustle by the end of Year 1. Scale from there. At 36 with responsibilities, protect your time and health — do not take on a second business that requires full-time energy.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">📊</span>
+            <div class="step-text">
+              <strong>Direct Stocks — Only After 3 Years of MF Experience.</strong> Once you understand market behaviour through mutual funds, consider allocating 10–15% of investable corpus to direct equity. Restrict to Nifty 50 companies only initially. Absolutely avoid F&O (futures and options) — SEBI data shows 89% of retail F&O traders lose money. F&O is not investing; it is speculation with structural disadvantages.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ INVESTMENT TABLE ═══ -->
+  <div class="section page-break">
+    <div class="section-label">Investment Reference</div>
+    <h2 class="section-title">All Instruments at a Glance</h2>
+    <p class="section-intro">Every investment option available to an Indian resident, with returns, risk, and tax treatment — in one reference table.</p>
+
+    <table class="inv-table">
+      <thead>
+        <tr>
+          <th>Instrument</th>
+          <th>Expected Return</th>
+          <th>Risk</th>
+          <th>Tax Status</th>
+          <th>Best Used For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Nifty 50 Index Fund (SIP)</td><td>12–14% CAGR</td><td><span class="risk med">Medium</span></td><td>10% LTCG above ₹1.25L</td><td>Core long-term wealth building</td></tr>
+        <tr><td>Flexi Cap Mutual Fund</td><td>13–16% CAGR</td><td><span class="risk med">Medium</span></td><td>10% LTCG above ₹1.25L</td><td>Active management, long horizon</td></tr>
+        <tr><td>Mid/Small Cap Index Fund</td><td>15–18% CAGR</td><td><span class="risk high">High</span></td><td>10% LTCG above ₹1.25L</td><td>10–15 year horizon only</td></tr>
+        <tr><td>PPF (Public Provident Fund)</td><td>7.1% (tax-free)</td><td><span class="risk low">Low</span></td><td>EEE — fully exempt</td><td>Safe debt allocation + 80C</td></tr>
+        <tr><td>EPF (if employed)</td><td>8.25% (tax-free)</td><td><span class="risk low">Low</span></td><td>EEE — fully exempt</td><td>Mandatory retirement saving</td></tr>
+        <tr><td>NPS Tier 1 (75% equity)</td><td>10–12%</td><td><span class="risk med">Medium</span></td><td>Extra ₹50K deduction (80CCD-1B)</td><td>Retirement + tax optimisation</td></tr>
+        <tr><td>Sovereign Gold Bonds (SGB)</td><td>Gold appreciation + 2.5% p.a.</td><td><span class="risk low">Low</span></td><td>Nil at maturity (8 years)</td><td>Gold hedge allocation</td></tr>
+        <tr><td>Fixed Deposit (Bank)</td><td>6.5–7.5%</td><td><span class="risk low">Low</span></td><td>Fully taxable at slab rate</td><td>Emergency fund only</td></tr>
+        <tr><td>REITs (Embassy, Mindspace)</td><td>8–12%</td><td><span class="risk med">Medium</span></td><td>Dividend taxable at slab</td><td>Real estate without ownership</td></tr>
+        <tr><td>ELSS Mutual Fund</td><td>12–15% CAGR</td><td><span class="risk med">Medium</span></td><td>10% LTCG + 80C deduction (₹1.5L)</td><td>Tax-saving + equity growth</td></tr>
+        <tr><td>Direct Stocks (Nifty 50 co.)</td><td>Variable</td><td><span class="risk high">High</span></td><td>10% LTCG above ₹1.25L</td><td>After 3 years MF experience</td></tr>
+        <tr><td>F&amp;O Trading</td><td>Negative (89% lose)</td><td><span class="risk high">High</span></td><td>30% flat tax on gains</td><td>❌ Avoid entirely</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="rule">
+
+    <!-- TAX SECTION -->
+    <div class="section-label">Tax Optimisation</div>
+    <h3 style="font-family:'Playfair Display',serif; font-size:22px; margin-bottom:8px;">Your Annual Tax-Saving Stack</h3>
+    <p style="font-size:14px; color:var(--mid); font-style:italic; margin-bottom:20px;">At the 30% tax bracket, you can legally save ₹52,500–67,500 per year by using every available deduction.</p>
+
+    <div class="tax-grid">
+      <div class="tax-card">
+        <div class="instrument">80C Deductions</div>
+        <div class="limit">Limit: ₹1,50,000/year</div>
+        <div class="desc">EPF contribution, PPF investment, ELSS mutual fund, home loan principal repayment, children's tuition fees. All eligible under this single limit. Prioritise ELSS for the equity growth component.</div>
+      </div>
+      <div class="tax-card">
+        <div class="instrument">80CCD(1B) — NPS</div>
+        <div class="limit">Limit: ₹50,000/year</div>
+        <div class="desc">Completely over and above the 80C limit. Open a Tier 1 NPS account at eNPS.nsdl.com and invest ₹50,000/year. This is an additional tax deduction available only for NPS that most salaried Indians miss.</div>
+      </div>
+      <div class="tax-card">
+        <div class="instrument">80D — Health Insurance</div>
+        <div class="limit">Limit: ₹25,000–75,000/year</div>
+        <div class="desc">₹25,000 for your own + spouse + children's health insurance premium. Additional ₹25,000–50,000 for parents (higher if senior citizen). Pay premiums via cheque or digital — cash payments not eligible.</div>
+      </div>
+    </div>
+    <div class="total-save">
+      <div>
+        <div class="ts-label">Total Annual Tax Deductions Available</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:4px; font-style:italic;">80C + 80CCD(1B) + 80D combined</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="ts-val">₹2,25,000</div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.1em; margin-top:4px;">SAVES ₹67,500/YEAR AT 30% SLAB</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <div class="section page-break">
+    <div class="section-label">Retirement & Legacy</div>
+    <h2 class="section-title">Phase 5 — The Endgame</h2>
+    <p class="section-intro">Wealth without a plan to preserve and transfer it is incomplete. The final phase converts your accumulation engine into a sustainable income machine for you and your heirs.</p>
+
+    <!-- Phase 5 -->
+    <div class="phase-card p5">
+      <div class="phase-head">
+        <div class="phase-num">5</div>
+        <div class="phase-head-text">
+          <h3>Retirement &amp; Legacy Planning</h3>
+          <div class="phase-meta">Years 7+ · Age 43 Onwards · Preserve and Transfer</div>
+        </div>
+        <div class="phase-tag">Endgame</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-steps">
+          <li>
+            <span class="step-icon">🎯</span>
+            <div class="step-text">
+              <strong>Define Your Personal Retirement Number.</strong> Use the 25x rule: your target corpus = 25 × annual expenses at retirement. If you need ₹60,000/month today (₹7.2L/year), with 6% inflation over 20 years, your retirement monthly need becomes approximately ₹1.93L/month (₹23.2L/year). Corpus required: ₹23.2L × 25 = ₹5.8 Crore. The number is larger than most people expect — because inflation is more powerful than most people realise.
+              <div class="step-tip"><strong>Key assumption:</strong> With a ₹5.8 Crore corpus invested at 8% post-retirement (in balanced/debt funds), you can withdraw ₹23L/year indefinitely without depleting principal. This is your financial independence number.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">🔄</span>
+            <div class="step-text">
+              <strong>Rebalance from Growth to Stability at Age 50+.</strong> Approaching retirement, gradually migrate from high equity to a balanced allocation. Age 50: 70% equity, 30% debt. Age 55: 50% equity, 50% debt. Age 60: 30% equity, 70% debt. This "glide path" protects your corpus from a market crash destroying your wealth just as you need to draw on it. Balanced Advantage Funds automate this rebalancing.
+            </div>
+          </li>
+          <li>
+            <span class="step-icon">📝</span>
+            <div class="step-text">
+              <strong>Write a Will and Nominate Every Account.</strong> Ensure every financial account — bank, demat, EPF, PPF, NPS, insurance policy — has a valid, current nominee. Write a Will specifying exactly who receives what. Without a will, assets are frozen in legal disputes that can last years. A registered Will costs ₹5,000–15,000 via a lawyer, and registration at the sub-registrar (₹500–1,000) makes it nearly uncontestable.
+              <div class="step-tip"><strong>Online services:</strong> WillJini and GetMyCounsel offer affordable online Will drafting starting at ₹1,500. Still register the original document at a sub-registrar office for legal strength.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div style="margin-top:36px;">
+      <div class="section-label">Wealth Timeline</div>
+      <div style="font-size:13px; color:var(--muted); font-style:italic; margin-bottom:24px;">Assumption: ₹20,000/month SIP, increasing 10% annually, 12% CAGR</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Age 37 — Year 1</div>
+          <h4>Foundation Complete</h4>
+          <p>Emergency fund built. Insurance in place. First SIP running. Budget system operating. Net worth may still be near zero or negative — that is completely normal and expected at this stage.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Age 40 — Year 4</div>
+          <h4>First ₹12–18 Lakh Milestone</h4>
+          <p>SIP corpus growing visibly. EPF + PPF accumulating. All high-interest debt cleared. Side income generating ₹10,000+/month. The compounding flywheel is beginning to spin.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Age 45 — Year 9</div>
+          <h4>₹50–80 Lakh Range</h4>
+          <p>Major inflection point. Investments are now earning more per month than many people earn as a salary. Real estate appreciating. Multiple income streams operational. Confidence in the system builds.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Age 50 — Year 14</div>
+          <h4>₹1.5–2 Crore Range</h4>
+          <p>Children's education funded or close to it. Home loan nearly paid off. Begin retirement glide path — reduce equity exposure gradually. Financial freedom is now visible on the horizon.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Age 56 — Year 20</div>
+          <h4>₹3–5 Crore Range</h4>
+          <p>Retirement readiness achieved. Multiple passive income streams established. Work becomes optional, not mandatory. Will and estate plan in place. The wealth-building mission is complete.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MISTAKES ═══ -->
+  <div class="section page-break">
+    <div class="section-label">Risk Management</div>
+    <h2 class="section-title">Mistakes That Destroy Indian Investors</h2>
+    <p class="section-intro">Knowing what not to do is as important as knowing what to do. These six errors collectively prevent 90% of Indians from building meaningful wealth.</p>
+
+    <div class="trap-list">
+      <div class="trap-item">
+        <div class="trap-icon">⏰</div>
+        <div>
+          <h4>Waiting for the "Right Time" to Invest</h4>
+          <p>Market at all-time high? Do not wait. Market crashed 30%? Do not panic sell — keep your SIPs running. Time in the market always beats timing the market. Waiting just two years to begin costs ₹15–25L in final corpus on a ₹20,000/month SIP at 12% over 20 years.</p>
+        </div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-icon">📱</div>
+        <div>
+          <h4>Following Stock Tips, YouTube Traders and Telegram Channels</h4>
+          <p>India's financial social media is full of traders showing winning trades, never their losses. No one can reliably predict which stock doubles next month. SEBI data confirms 89% of retail F&O traders lost money in FY2023–24. The evidence-based path is boring: index funds, long-term SIPs, consistent holding.</p>
+        </div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-icon">🏡</div>
+        <div>
+          <h4>Treating Your Home as Your Only Investment</h4>
+          <p>A ₹50L property in a Tier-2 city appreciating 6% annually reaches ₹1.2 Crore in 15 years. The same ₹50L invested in Nifty 50 at 12% CAGR reaches ₹2.7 Crore. Real estate also carries maintenance costs, property tax, vacancy risk, and illiquidity. One house for living is wise. Concentrating wealth in a single illiquid asset is not.</p>
+        </div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-icon">💸</div>
+        <div>
+          <h4>Lifestyle Inflation: "I Will Save More When I Earn More"</h4>
+          <p>Every time income rises, expenses mysteriously expand to fill the space. The solution: automate your SIP debit on salary credit day (1st or 5th of month). Increase SIP by 10% each January automatically. What you do not see, you do not spend. The percentage of income saved matters more than the absolute rupee amount.</p>
+        </div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-icon">🔢</div>
+        <div>
+          <h4>Ignoring Tax Efficiency — The Silent Wealth Destroyer</h4>
+          <p>A 30% tax slab investor in a bank FD earning 7% effectively receives only 4.9% post-tax. The same investor in ELSS earns 12–14% with only 10% LTCG on gains above ₹1.25L. The annual tax saving stack of ₹2.25L in deductions creates ₹67,500/year in tax relief that can be reinvested — adding ₹60–80L to the final corpus over 20 years.</p>
+        </div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-icon">😰</div>
+        <div>
+          <h4>Panic-Selling During Market Corrections</h4>
+          <p>The Nifty 50 fell 60% in 2008 and 38% in March 2020. In both cases, investors who kept SIPs running made extraordinary returns within 2–3 years. Those who sold locked in permanent losses. Market crashes are the best SIP opportunities — you purchase more units at lower prices. The only question during a crash is: can I afford to keep investing? If yes, do not stop.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVOID GRID -->
+    <div style="margin-top:28px;">
+      <div class="section-label">Absolute Avoids</div>
+      <div class="avoid-grid">
+        <div class="avoid-item"><div class="x">✗</div><div><strong>F&O Trading</strong> — 89% of retail traders lose. Structural disadvantage for retail investors.</div></div>
+        <div class="avoid-item"><div class="x">✗</div><div><strong>Penny Stocks &amp; Tips</strong> — Pump-and-dump operations designed to transfer money from you to operators.</div></div>
+        <div class="avoid-item"><div class="x">✗</div><div><strong>ULIPs &amp; Endowment Plans</strong> — High hidden charges, poor insurance cover, poor investment returns. Worst of both worlds.</div></div>
+        <div class="avoid-item"><div class="x">✗</div><div><strong>Crypto (Large Allocation)</strong> — Unregulated in India, 30% flat tax, extreme volatility. Maximum 2–3% if at all.</div></div>
+        <div class="avoid-item"><div class="x">✗</div><div><strong>Chit Funds (Informal)</strong> — Unregistered chit funds have high fraud risk. If participating, only KSFE or Shriram registered chits.</div></div>
+        <div class="avoid-item"><div class="x">✗</div><div><strong>Guaranteed 15%+ Schemes</strong> — No legitimate investment guarantees above-FD returns. If it sounds extraordinary, it is a scam.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CHECKLIST ═══ -->
+  <div class="section">
+    <div class="section-label">Action Plan</div>
+    <h2 class="section-title">Your First-30-Days Checklist</h2>
+    <p class="section-intro">Do these in order. Do not skip to investments before completing the foundation items. The sequence is designed intentionally.</p>
+
+    <div class="check-cols">
+      <div class="check-item"><div class="check-box"></div><div>Open a demat + trading account (Zerodha or Groww — zero AMC)</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Calculate monthly budget: income minus all expenses</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Open high-interest savings / liquid fund for emergency corpus</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Get health insurance — minimum ₹10L family floater cover</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Buy term life insurance if dependents exist (₹1 Crore cover)</div></div>
+      <div class="check-item"><div class="check-box"></div><div>List all debts with interest rates — create payoff priority order</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Clear all credit card outstanding balance this month</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Start first SIP — even ₹500 in Nifty 50 Index Fund</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Open PPF account at bank or post office — invest ₹500 to activate</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Open NPS Tier 1 account at eNPS.nsdl.com</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Verify all EPF accounts linked to UAN at epfindia.gov.in</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Add nominee to every bank, demat, EPF, and insurance account</div></div>
+      <div class="check-item"><div class="check-box"></div><div>File ITR for current year if income exceeds ₹2.5 Lakh</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Set a recurring reminder to review portfolio every January</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Read "Let's Talk Money" by Monika Halan (India-specific, beginner)</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Set SIP amount to auto-debit on salary day — remove manual decision</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ CLOSING ═══ -->
+  <div class="closing">
+    <blockquote>"The investor who starts today with discipline always outperforms the investor who waits for certainty."</blockquote>
+    <cite>The Compounding Principle · Indian Personal Finance</cite>
+    <p class="final-note">
+      This plan was built for a 36-year-old Indian male starting from zero in 2025.<br>
+      All figures are indicative. Past returns of Nifty 50 do not guarantee future performance.<br>
+      Consult a SEBI-registered fee-only financial advisor for personalised guidance.<br><br>
+      Start ugly. Start small. Start now.
+    </p>
+  </div>
+
+</div>
+
+<script>
+// Simple print trigger with a fallback
+document.querySelector('.print-btn').addEventListener('click', function() {
+  window.print();
+});
+</script>
+</body>
+</html>
