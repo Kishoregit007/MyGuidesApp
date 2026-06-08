@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 import Dashboard from './Dashboard.jsx'
 import AudioPage from './AudioPage.jsx'
 import './App.css'
+import './mobile.css'
 
 function App() {
   const [count, setCount] = useState(0)

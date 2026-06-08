@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import './AudioPage.css'
 
 export default function AudioPage({ onBack }) {
   const audios = useMemo(
@@ -28,35 +29,26 @@ export default function AudioPage({ onBack }) {
   )
 
   return (
-    <div style={{ padding: '24px', maxWidth: '960px', margin: '0 auto' }}>
+    <div className="audio-page">
       <button
         type="button"
         className="counter"
         onClick={onBack}
-        style={{ marginBottom: '24px', background: '#1a4d2e' }}
+        style={{ marginBottom: '16px', background: '#1a4d2e' }}
       >
         ← Back
       </button>
 
-      <h1 style={{ marginBottom: '16px' }}>🎧 My Audios</h1>
-      <p style={{ marginBottom: '24px', color: '#555' }}>
+      <h1 style={{ marginBottom: '12px' }}>🎧 My Audios</h1>
+      <p style={{ marginBottom: '18px', color: '#555' }}>
         Tap any file to play it in the browser. Your audio files are loaded from the local `src/Audio` folder.
       </p>
 
-      <div style={{ display: 'grid', gap: '20px' }}>
+      <div style={{ display: 'grid', gap: '16px' }}>
         {audios.map((audio) => (
-          <div
-            key={audio.src}
-            style={{
-              padding: '18px',
-              border: '1px solid #d4d4d4',
-              borderRadius: '10px',
-              background: '#fff',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.04)'
-            }}
-          >
-            <h3 style={{ margin: '0 0 10px', fontSize: '18px' }}>{audio.title}</h3>
-            <audio controls src={audio.src} style={{ width: '100%' }} />
+          <div key={audio.src} className="audio-card">
+            <h3 style={{ margin: '0 0 8px', fontSize: '16px' }}>{audio.title}</h3>
+            <audio controls src={audio.src} />
           </div>
         ))}
       </div>
