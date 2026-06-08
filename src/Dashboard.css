@@ -32,7 +32,14 @@
   gap: 15px;
 }
 
+.guide-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .guide-card {
+  width: 100%;
   background: #34495e;
   border: 2px solid transparent;
   border-radius: 8px;
@@ -81,6 +88,33 @@
   opacity: 0.85;
   line-height: 1.4;
   color: #bdc3c7;
+}
+
+.sub-guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(236, 240, 241, 0.16);
+}
+
+.sub-guide-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #d4af37;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.guide-card.sub {
+  background: #2e4f67;
+  border-color: #c8b56b;
+}
+
+.guide-card.sub .guide-icon {
+  opacity: 0.9;
 }
 
 .dashboard-content {

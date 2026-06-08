@@ -3,14 +3,19 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import Dashboard from './Dashboard.jsx'
+import AudioPage from './AudioPage.jsx'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [showHome, setShowHome] = useState(true)
+  const [page, setPage] = useState('home')
 
-  if (!showHome) {
-    return <Dashboard />
+  if (page === 'guides') {
+    return <Dashboard onBack={() => setPage('home')} />
+  }
+
+  if (page === 'audios') {
+    return <AudioPage onBack={() => setPage('home')} />
   }
 
   return (
@@ -27,21 +32,31 @@ function App() {
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setShowHome(false)}
-          style={{ marginLeft: '10px', background: '#2c3e50' }}
-        >
-          📚 Go to Guides Dashboard
-        </button>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '24px' }}>
+          <button
+            type="button"
+            className="counter"
+            onClick={() => setCount((count) => count + 1)}
+          >
+            Count is {count}
+          </button>
+          <button
+            type="button"
+            className="counter"
+            onClick={() => setPage('guides')}
+            style={{ background: '#2c3e50' }}
+          >
+            📚 Go to Guides Dashboard
+          </button>
+          <button
+            type="button"
+            className="counter"
+            onClick={() => setPage('audios')}
+            style={{ background: '#1a4d2e' }}
+          >
+            🎧 My Audios
+          </button>
+        </div>
       </section>
 
       <div className="ticks"></div>

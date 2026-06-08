@@ -6,6 +6,7 @@ const WellnessPlan = lazy(() => import('./wellness_plan.jsx'))
 const ChildDevelopment = lazy(() => import('./ChildDevelopmentGuide.jsx'))
 const WealthMasterPlan = lazy(() => import('./wealth_master_plan.jsx'))
 const MicroSaaSGuide = lazy(() => import('./Service-based_micro-business_guide.jsx'))
+const ProtectionPlan = lazy(() => import('./protection_blueprint.jsx'))
 
 export const GUIDES = [
   {
@@ -14,13 +15,6 @@ export const GUIDES = [
     icon: '🎯',
     description: 'Java engineer roadmap with DSA & system design',
     component: CareerRoadmap
-  },
-  {
-    id: 'sidehustle',
-    name: 'Side Hustle Guide',
-    icon: '💰',
-    description: 'Multiple income stream opportunities',
-    component: SideHustleGuide
   },
   {
     id: 'wellness',
@@ -41,13 +35,30 @@ export const GUIDES = [
     name: 'Wealth Master Plan',
     icon: '💎',
     description: 'Personal wealth-building roadmap for age 36+',
-    component: WealthMasterPlan
+    component: WealthMasterPlan,
+    children: [
+      {
+        id: 'protection',
+        name: 'Protection Plan',
+        icon: '�️',
+        description: 'Comprehensive protection strategies for your assets',
+        component: ProtectionPlan
+      },
+      {
+        id: 'sidehustle',
+        name: 'Side Hustle Guide',
+        icon: '💰',
+        description: 'Revenue diversification and income stream ideas',
+        component: SideHustleGuide
+      },
+      {
+        id: 'micro-saas',
+        name: 'Micro SaaS Guide',
+        icon: '�',
+        description: 'Guide to building and scaling a micro SaaS business',
+        component: MicroSaaSGuide
+      }
+    ]
   },
-  {
-    id: 'micro-saas',
-    name: 'Micro SaaS Guide',
-    icon: '�',
-    description: 'Guide to building and scaling a micro SaaS business',
-    component: MicroSaaSGuide
-  }
+  
 ]
