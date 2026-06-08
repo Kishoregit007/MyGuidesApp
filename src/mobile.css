@@ -1,5 +1,5 @@
 /* Global small-screen overrides */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
   }
@@ -7,10 +7,10 @@
     width: 100%;
     height: auto;
     position: static;
-    padding: 14px;
+    padding: 12px;
   }
   .dashboard-content {
-    padding: 16px;
+    padding: 14px;
   }
   .guide-card h3 {
     font-size: 14px;
@@ -21,14 +21,37 @@
   .sub-guide-list {
     padding-left: 12px;
   }
-  .hero .base {
-    width: 120px;
+  /* Hide the hero graphic entirely on small screens to save space */
+  .hero {
+    display: none !important;
   }
-  .hero .framework,
-  .hero .vite {
-    display: none;
+
+  /* Stack primary action buttons and make them full-width */
+  #center .counter {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    margin: 8px auto;
+    box-sizing: border-box;
+    padding: 10px 14px;
   }
+
+  /* Reduce large headings and spacing */
+  h1 {
+    font-size: 28px;
+    margin: 12px 0;
+  }
+  h2 {
+    font-size: 18px;
+  }
+
+  /* Remove side border and add small horizontal padding */
+  #root {
+    border-inline: none;
+    padding-inline: 12px;
+  }
+
   #center {
-    padding: 20px;
+    padding: 14px;
   }
 }
