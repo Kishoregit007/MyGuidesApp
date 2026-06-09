@@ -23,6 +23,14 @@ export default function AudioPage({ onBack }) {
       {
         title: 'DSA - Linked List',
         src: new URL('./Audio/M02-DSA-LinkedList.m4a', import.meta.url).href
+      },
+      {
+        title: 'DSA - Stacks & Queues',
+        src: new URL('./Audio/M03-DSA-Stacks_&_Queues.m4a', import.meta.url).href
+      },
+      {
+        title: 'DSA - Trees (Binary & BST)',
+        src: new URL('./Audio/M04-DSA-Trees-Binary & BST.m4a', import.meta.url).href
       }
     ],
     []
