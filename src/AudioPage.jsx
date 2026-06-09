@@ -4,34 +4,42 @@ import './AudioPage.css'
 export default function AudioPage({ onBack }) {
   const audios = useMemo(
     () => [
-      {
-        title: 'Bitwise math and Java HashMap architecture',
-        src: new URL('./Audio/Bitwise_math_and_Java_HashMap_architecture.m4a', import.meta.url).href
-      },
-      {
-        title: 'Java HashMap Collisions कैसे काम करते हैं',
-        src: new URL('./Audio/Java_HashMap_Collisions_कैसे_काम_करते_हैं.m4a', import.meta.url).href
-      },
-      {
-        title: 'ଜେଭିଏମ୍ ଜେଆରଇ ଏବଂ ଜେଡିକେ ର ଭିତର କଥା',
-        src: new URL('./Audio/ଜେଭିଏମ୍_ଜେଆରଇ_ଏବଂ_ଜେଡିକେ_ର_ଭିତର_କଥା.m4a', import.meta.url).href
-      },
-      {
-        title: 'M01-DSA - Arrays & Strings',
-        src: new URL('./Audio/M01-DSA-Arrays_Strings.m4a', import.meta.url).href
-      },
-      {
-        title: 'M02-DSA - Linked List',
-        src: new URL('./Audio/M02-DSA-LinkedList.m4a', import.meta.url).href
-      },
-      {
-        title: 'M03-DSA - Stacks & Queues',
-        src: new URL('./Audio/M03-DSA-Stacks_&_Queues.m4a', import.meta.url).href
-      },
-      {
-        title: 'M04-DSA - Trees (Binary & BST)',
-        src: new URL('./Audio/M04-DSA-Trees-Binary & BST.m4a', import.meta.url).href
-      }
+        {
+            title: 'Inside of JVM, JRE, JDK - Java Platform Explained',
+            src: new URL('./Audio/JVM_JRE_JDK_Inside.m4a', import.meta.url).href
+        },
+        {
+            title: 'Real World Best Practices of JVM, JRE, JDK',
+            src: new URL('./Audio/RWBP-JVM_JRE_JDK.m4a', import.meta.url).href
+        },
+        {
+            title: 'Bitwise math and Java HashMap architecture',
+            src: new URL('./Audio/Bitwise_math_and_Java_HashMap_architecture.m4a', import.meta.url).href
+        },
+        {
+            title: 'Java HashMap Collisions कैसे काम करते हैं',
+            src: new URL('./Audio/Java_HashMap_Collisions_कैसे_काम_करते_हैं.m4a', import.meta.url).href
+        },
+        {
+            title: 'M01-DSA - Arrays & Strings',
+            src: new URL('./Audio/M01-DSA-Arrays_Strings.m4a', import.meta.url).href
+        },
+        {
+            title: 'M02-DSA - Linked List',
+            src: new URL('./Audio/M02-DSA-LinkedList.m4a', import.meta.url).href
+        },
+        {
+            title: 'M03-DSA - Stacks & Queues',
+            src: new URL('./Audio/M03-DSA-Stacks_&_Queues.m4a', import.meta.url).href
+        },
+        {
+            title: 'M04.1-DSA - Trees (Binary & BST)',
+            src: new URL('./Audio/M04.1-DSA-Trees-Binary & BST.m4a', import.meta.url).href
+        },
+        {
+            title: 'M04.2-RWBP - Trees (Binary & BST)',
+            src: new URL('./Audio/M04.2-RWBP-BinaryTree_ServerCrash.m4a', import.meta.url).href
+        }
     ],
     []
   )
