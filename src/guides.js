@@ -7,6 +7,7 @@ const ChildDevelopment = lazy(() => import('./ChildDevelopmentGuide.jsx'))
 const WealthMasterPlan = lazy(() => import('./wealth_master_plan.jsx'))
 const MicroSaaSGuide = lazy(() => import('./Service-based_micro-business_guide.jsx'))
 const ProtectionPlan = lazy(() => import('./protection_blueprint.jsx'))
+const DsaDeepRef = lazy(() => import('./dsa_deep_reference.jsx'))
 
 export const GUIDES = [
   {
@@ -14,7 +15,16 @@ export const GUIDES = [
     name: 'Career Roadmap',
     icon: '🎯',
     description: 'Java engineer roadmap with DSA & system design',
-    component: CareerRoadmap
+    component: CareerRoadmap,
+    children: [
+      {
+        id: 'dsa',
+        name: 'DSA Deep Reference',
+        icon: '📚',
+        description: 'Comprehensive reference for DSA concepts and problems',
+        component: DsaDeepRef
+      }
+    ]
   },
   {
     id: 'wellness',
