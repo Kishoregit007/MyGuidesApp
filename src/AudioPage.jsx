@@ -17,19 +17,19 @@ export default function AudioPage({ onBack }) {
         src: new URL('./Audio/ଜେଭିଏମ୍_ଜେଆରଇ_ଏବଂ_ଜେଡିକେ_ର_ଭିତର_କଥା.m4a', import.meta.url).href
       },
       {
-        title: 'DSA - Arrays & Strings',
+        title: 'M01-DSA - Arrays & Strings',
         src: new URL('./Audio/M01-DSA-Arrays_Strings.m4a', import.meta.url).href
       },
       {
-        title: 'DSA - Linked List',
+        title: 'M02-DSA - Linked List',
         src: new URL('./Audio/M02-DSA-LinkedList.m4a', import.meta.url).href
       },
       {
-        title: 'DSA - Stacks & Queues',
+        title: 'M03-DSA - Stacks & Queues',
         src: new URL('./Audio/M03-DSA-Stacks_&_Queues.m4a', import.meta.url).href
       },
       {
-        title: 'DSA - Trees (Binary & BST)',
+        title: 'M04-DSA - Trees (Binary & BST)',
         src: new URL('./Audio/M04-DSA-Trees-Binary & BST.m4a', import.meta.url).href
       }
     ],
