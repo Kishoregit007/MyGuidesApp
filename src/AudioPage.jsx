@@ -21,16 +21,28 @@ export default function AudioPage({ onBack }) {
             src: new URL('./Audio/Java_HashMap_Collisions_कैसे_काम_करते_हैं.m4a', import.meta.url).href
         },
         {
-            title: 'M01-DSA - Arrays & Strings',
-            src: new URL('./Audio/M01-DSA-Arrays_Strings.m4a', import.meta.url).href
+            title: 'M01.1-DSA - Arrays & Strings',
+            src: new URL('./Audio/M01.1-DSA-Arrays_Strings.m4a', import.meta.url).href
         },
         {
-            title: 'M02-DSA - Linked List',
-            src: new URL('./Audio/M02-DSA-LinkedList.m4a', import.meta.url).href
+            title: 'M01.2-RWBP - Arrays & Strings',
+            src: new URL('./Audio/M01.2-RWBP-Arrays_Strings.m4a', import.meta.url).href
         },
         {
-            title: 'M03-DSA - Stacks & Queues',
-            src: new URL('./Audio/M03-DSA-Stacks_&_Queues.m4a', import.meta.url).href
+            title: 'M02.1-DSA - Linked List',
+            src: new URL('./Audio/M02.1-DSA-LinkedList.m4a', import.meta.url).href
+        },
+        {
+            title: 'M02.2-RWBP - Linked List',
+            src: new URL('./Audio/M02.2-RWBP-LinkedList.m4a', import.meta.url).href
+        },
+        {
+            title: 'M03.1-DSA - Stacks & Queues',
+            src: new URL('./Audio/M03.1-DSA-Stacks_&_Queues.m4a', import.meta.url).href
+        },
+        {
+            title: 'M03.2-RWBP - Stacks & Queues',
+            src: new URL('./Audio/M03.2-RWBP-Stacks_&_Queues.m4a', import.meta.url).href
         },
         {
             title: 'M04.1-DSA - Trees (Binary & BST)',
@@ -39,6 +51,14 @@ export default function AudioPage({ onBack }) {
         {
             title: 'M04.2-RWBP - Trees (Binary & BST)',
             src: new URL('./Audio/M04.2-RWBP-BinaryTree_ServerCrash.m4a', import.meta.url).href
+        },
+        {
+            title: 'M05.1-DSA - Heaps & Priority Queues',
+            src: new URL('./Audio/M05.1-DSA-Heaps-PriorityQ.m4a', import.meta.url).href
+        },
+        {
+            title: 'M05.2-RWBP - Heaps & Priority Queues',
+            src: new URL('./Audio/M05.2-RWBP-Heaps-PriorityQ.m4a', import.meta.url).href
         }
     ],
     []
