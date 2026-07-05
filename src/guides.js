@@ -8,6 +8,9 @@ const WealthMasterPlan = lazy(() => import('./wealth_master_plan.jsx'))
 const MicroSaaSGuide = lazy(() => import('./Service-based_micro-business_guide.jsx'))
 const ProtectionPlan = lazy(() => import('./protection_blueprint.jsx'))
 const DsaDeepRef = lazy(() => import('./dsa_deep_reference.jsx'))
+const BiflIndiaguide = lazy(() => import('./BIFLIndiaGuide.jsx'))
+const DomainMastery = lazy(() => import('./kp_domain_mastery.jsx'))
+const NatureGuide = lazy(() => import('./kp_true_nature_guide.jsx'))
 
 export const GUIDES = [
   {
@@ -23,6 +26,13 @@ export const GUIDES = [
         icon: '📚',
         description: 'Comprehensive reference for DSA concepts and problems',
         component: DsaDeepRef
+      },
+      {
+        id: 'domain-mastery',
+        name: 'Domain Mastery',
+        icon: '🧠',
+        description: 'Deep dive into domain-specific knowledge and skills',
+        component: DomainMastery
       }
     ]
   },
@@ -50,7 +60,7 @@ export const GUIDES = [
       {
         id: 'protection',
         name: 'Protection Plan',
-        icon: '�️',
+        icon: '🛡️',
         description: 'Comprehensive protection strategies for your assets',
         component: ProtectionPlan
       },
@@ -64,11 +74,24 @@ export const GUIDES = [
       {
         id: 'micro-saas',
         name: 'Micro SaaS Guide',
-        icon: '�',
+        icon: '💻',
         description: 'Guide to building and scaling a micro SaaS business',
         component: MicroSaaSGuide
       }
     ]
   },
-  
+  {
+    id: 'bifl-india',
+    name: 'BIFL India Guide',
+    icon: '🇮🇳',
+    description: 'Comprehensive guide for BIFL in India',
+    component: BiflIndiaguide
+  },
+  {
+    id: 'nature-guide',
+    name: 'Nature Guide',
+    icon: '🌲',
+    description: 'Guide to understanding and connecting with the natural world',
+    component: NatureGuide
+  }
 ]
