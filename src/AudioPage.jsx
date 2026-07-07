@@ -59,7 +59,27 @@ export default function AudioPage({ onBack }) {
         {
             title: 'M05.2-RWBP - Heaps & Priority Queues',
             src: new URL('./Audio/M05.2-RWBP-Heaps-PriorityQ.m4a', import.meta.url).href
-        }
+        },
+        {
+            title: 'M06.1-DSA - Hashing',
+            src: new URL('./Audio/M06.1-DSA-Hashing-data-searching.m4a', import.meta.url).href
+        },
+        {
+            title: 'M06.2-RWBP - Hashing',
+            src: new URL('./Audio/M06.2-DSA-HashTables-OpenAddressing-SeparateChaining.m4a', import.meta.url).href
+        },
+        {
+            title: 'M07.1-DSA - Graphs (BFS & DFS)',
+            src: new URL('./Audio/M07.1-DSA-Graphs-BFSDFS.m4a', import.meta.url).href
+        },
+        {
+            title: 'M07.2-RWBP - Graphs (BFS & DFS)',
+            src: new URL('./Audio/M07.2-RWBP-Graphs.m4a', import.meta.url).href
+        },
+        {
+            title: 'M08.1-DSA - DP Patterns 1 (knapsack, LCS)',
+            src: new URL('./Audio/M08.1-DSA-DP1.m4a', import.meta.url).href
+        },
     ],
     []
   )

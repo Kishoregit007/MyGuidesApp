@@ -11,6 +11,7 @@ const DsaDeepRef = lazy(() => import('./dsa_deep_reference.jsx'))
 const BiflIndiaguide = lazy(() => import('./BIFLIndiaGuide.jsx'))
 const DomainMastery = lazy(() => import('./kp_domain_mastery.jsx'))
 const NatureGuide = lazy(() => import('./kp_true_nature_guide.jsx'))
+const SeniorEngineerChecklist = lazy(() => import('./SeniorEngineerChecklist.jsx'))
 
 export const GUIDES = [
   {
@@ -86,6 +87,13 @@ export const GUIDES = [
     icon: '🇮🇳',
     description: 'Comprehensive guide for BIFL in India',
     component: BiflIndiaguide
+  },
+  {
+    id: 'senior-engineer-checklist',
+    name: "Senior Engineer Checklist",
+    icon: '🛠️',
+    description: 'Senior Engineer domain checklist HTML guide',
+    component: SeniorEngineerChecklist
   },
   {
     id: 'nature-guide',
