@@ -12,6 +12,8 @@ const BiflIndiaguide = lazy(() => import('./BIFLIndiaGuide.jsx'))
 const DomainMastery = lazy(() => import('./kp_domain_mastery.jsx'))
 const NatureGuide = lazy(() => import('./kp_true_nature_guide.jsx'))
 const SeniorEngineerChecklist = lazy(() => import('./SeniorEngineerChecklist.jsx'))
+const DomainInterviewPrep = lazy(() => import('./kp_interview_qa_v2.jsx'))
+const SpeakingFluency = lazy(() => import('./SpeakingFluency.jsx'))
 
 export const GUIDES = [
   {
@@ -34,6 +36,27 @@ export const GUIDES = [
         icon: '🧠',
         description: 'Deep dive into domain-specific knowledge and skills',
         component: DomainMastery
+      },
+      {
+        id: 'domain-interview-prep',
+        name: 'Domain Interview Prep',
+        icon: '💼',
+        description: 'Preparation strategies for domain-specific job interviews',
+        component: DomainInterviewPrep
+      },
+      {
+        id: 'senior-engineer-checklist',
+        name: "Senior Engineer Checklist",
+        icon: '🛠️',
+        description: 'Senior Engineer domain checklist HTML guide',
+        component: SeniorEngineerChecklist
+      },
+      {
+        id: 'speaking-fluency',
+        name: 'Speaking Fluency Guide',
+        icon: '🗣️',
+        description: 'Guide to improving speaking fluency and communication skills',
+        component: SpeakingFluency
       }
     ]
   },
@@ -87,13 +110,6 @@ export const GUIDES = [
     icon: '🇮🇳',
     description: 'Comprehensive guide for BIFL in India',
     component: BiflIndiaguide
-  },
-  {
-    id: 'senior-engineer-checklist',
-    name: "Senior Engineer Checklist",
-    icon: '🛠️',
-    description: 'Senior Engineer domain checklist HTML guide',
-    component: SeniorEngineerChecklist
   },
   {
     id: 'nature-guide',

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speak Well — English Fluency Practice</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f7f4ef;
+    --accent: #2d6a4f;
+    --accent-soft: #d8f3dc;
+    --gold: #b5860d;
+    --gold-soft: #fef9e7;
+    --warm: #e76f51;
+    --warm-soft: #fde8e4;
+    --slate: #4a5568;
+    --rule: #d4c9bb;
+    --white: #ffffff;
+    --tag-blue: #e8f4fd;
+    --tag-blue-text: #1a6491;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 32px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--warm), var(--accent));
+  }
+  .masthead-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .masthead h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: #a8d8b9;
+  }
+  .masthead-desc {
+    font-size: 14px;
+    color: #b0aaa0;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+  .masthead-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ccc;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: 16px;
+    margin-right: 6px;
+  }
+
+  /* NAV TABS */
+  .tabs-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 24px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--slate);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  /* SECTION PANEL */
+  .section-panel { display: none; }
+  .section-panel.active { display: block; }
+
+  .section-intro {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .section-intro h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  .section-intro p {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* CATEGORY LABEL */
+  .cat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 28px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* SENTENCE CARD */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-color: #bbb;
+  }
+  .card.done {
+    border-left: 3px solid var(--accent);
+    background: #fafffe;
+  }
+  .card-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: #bbb;
+    min-width: 22px;
+    padding-top: 2px;
+  }
+  .card-body { flex: 1; }
+  .card-sentence {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .card-note {
+    font-size: 12px;
+    color: var(--slate);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--tag-blue);
+    color: var(--tag-blue-text);
+    letter-spacing: 0.03em;
+  }
+  .tag.g { background: var(--accent-soft); color: #1b4332; }
+  .tag.w { background: var(--warm-soft); color: #7b2d19; }
+  .tag.y { background: var(--gold-soft); color: #7d5a0a; }
+
+  .check-btn {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--rule);
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: transparent;
+  }
+  .card.done .check-btn {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .check-btn:hover { border-color: var(--accent); }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .prog-label { font-size: 12px; color: var(--slate); white-space: nowrap; }
+  .prog-bar {
+    flex: 1; height: 6px;
+    background: var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #52b788);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .prog-count { font-size: 12px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+  /* TIP BOX */
+  .tip-box {
+    background: var(--gold-soft);
+    border: 1px solid #f0d080;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #6b4c08;
+    line-height: 1.6;
+  }
+  .tip-box strong { display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* RESET */
+  .reset-btn {
+    font-size: 12px;
+    color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    margin-top: 6px;
+  }
+  .reset-btn:hover { color: var(--warm); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .masthead { padding: 28px 18px 24px; }
+    .main { padding: 18px 12px 48px; }
+    .card { padding: 14px 14px; }
+    .card-sentence { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-eyebrow">Your Daily Practice Guide</div>
+  <h1>Speak Well,<br><em>Every Day.</em></h1>
+  <p class="masthead-desc">A structured sentence bank to build English speaking fluency — naturally, confidently, and progressively. Read aloud daily. Repeat until it flows.</p>
+  <span class="masthead-tag">🗣 Speaking Fluency</span>
+  <span class="masthead-tag">💼 Interview Ready</span>
+  <span class="masthead-tag">🎤 Presentations</span>
+  <span class="masthead-tag">🧠 Debates & Discussion</span>
+</div>
+
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('everyday')">Everyday English</button>
+  <button class="tab-btn" onclick="switchTab('interview')">Interviews</button>
+  <button class="tab-btn" onclick="switchTab('debate')">Debate & Discussion</button>
+  <button class="tab-btn" onclick="switchTab('presentation')">Presentations</button>
+  <button class="tab-btn" onclick="switchTab('transitions')">Connectors & Flow</button>
+</div>
+
+<div class="main">
+
+  <!-- EVERYDAY -->
+  <div class="section-panel active" id="panel-everyday">
+    <div class="section-intro">
+      <h2>Everyday English Fluency</h2>
+      <p>These are the sentences that build your speaking rhythm — for conversations with colleagues, small talk, expressing opinions, and thinking clearly in English. Say each one aloud, slowly at first, then naturally.</p>
+    </div>
+    <div id="prog-everyday" class="progress-bar-wrap">
+      <span class="prog-label">Today's practice</span>
+      <div class="prog-bar"><div class="prog-fill" id="fill-everyday" style="width:0%"></div></div>
+      <span class="prog-count" id="count-everyday">0 / 0</span>
+    </div>
+    <div id="cards-everyday"></div>
+  </div>
+
+  <!-- INTERVIEW -->
+  <div class="section-panel" id="panel-interview">
+    <div class="section-intro">
+      <h2>Interview English</h2>
+      <p>These sentences help you articulate your experience, handle tough questions, and sound composed under pressure. Great for both technical and HR rounds. Practice them like scripts — until they feel natural.</p>
+    </div>
+    <div id="prog-interview" class="progress-bar-wrap">
+      <span class="prog-label">Today's practice</span>
+      <div class="prog-bar"><div class="prog-fill" id="fill-interview" style="width:0%"></div></div>
+      <span class="prog-count" id="count-interview">0 / 0</span>
+    </div>
+    <div id="cards-interview"></div>
+  </div>
+
+  <!-- DEBATE -->
+  <div class="section-panel" id="panel-debate">
+    <div class="section-intro">
+      <h2>Debate & Discussion Language</h2>
+      <p>The language of intelligent disagreement, building on others' points, and holding your ground respectfully. These phrases make you sound measured and confident — never rude, always persuasive.</p>
+    </div>
+    <div id="prog-debate" class="progress-bar-wrap">
+      <span class="prog-label">Today's practice</span>
+      <div class="prog-bar"><div class="prog-fill" id="fill-debate" style="width:0%"></div></div>
+      <span class="prog-count" id="count-debate">0 / 0</span>
+    </div>
+    <div id="cards-debate"></div>
+  </div>
+
+  <!-- PRESENTATION -->
+  <div class="section-panel" id="panel-presentation">
+    <div class="section-intro">
+      <h2>Presentation & Public Speaking</h2>
+      <p>Open strongly, guide your audience, handle Q&A gracefully, and close with impact. These are the building blocks of a confident speaker. Speak them standing up — posture matters.</p>
+    </div>
+    <div id="prog-presentation" class="progress-bar-wrap">
+      <span class="prog-label">Today's practice</span>
+      <div class="prog-bar"><div class="prog-fill" id="fill-presentation" style="width:0%"></div></div>
+      <span class="prog-count" id="count-presentation">0 / 0</span>
+    </div>
+    <div id="cards-presentation"></div>
+  </div>
+
+  <!-- TRANSITIONS -->
+  <div class="section-panel" id="panel-transitions">
+    <div class="section-intro">
+      <h2>Connectors, Fillers & Flow Words</h2>
+      <p>The glue of fluent speech. These replace hesitation sounds ("um", "uh") with intelligent connectors. Memorise these phrases and your speech will immediately sound more structured and natural.</p>
+    </div>
+    <div id="prog-transitions" class="progress-bar-wrap">
+      <span class="prog-label">Today's practice</span>
+      <div class="prog-bar"><div class="prog-fill" id="fill-transitions" style="width:0%"></div></div>
+      <span class="prog-count" id="count-transitions">0 / 0</span>
+    </div>
+    <div id="cards-transitions"></div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+const DATA = {
+  everyday: [
+    {
+      cat: "Starting Conversations",
+      items: [
+        { s: "I was thinking about this earlier — what's your take on it?", n: "Great opener that shows you've reflected before speaking.", tags: ["opinion", "natural"] },
+        { s: "That's actually a really interesting point. I hadn't considered it from that angle.", n: "Shows active listening. Buys you a moment to gather thoughts.", tags: ["listening", "response"] },
+        { s: "Let me put it this way — the core idea is fairly simple once you see it.", n: "Use this when simplifying something complex.", tags: ["clarifying"] },
+        { s: "I'd love to hear your perspective on this before I share mine.", n: "Invites dialogue. Makes you seem collaborative and thoughtful.", tags: ["collaborative"] },
+        { s: "That's a fair point — and I think it connects well with what we were discussing earlier.", n: "Links ideas smoothly. Shows you're tracking the conversation.", tags: ["linking"] },
+      ]
+    },
+    {
+      cat: "Expressing Opinions Confidently",
+      items: [
+        { s: "In my experience, the most effective approach is to start small and scale gradually.", n: "Lead with experience — it sounds grounded, not arrogant.", tags: ["opinion"] },
+        { s: "I genuinely believe this is the right direction, and here's why.", n: "Use 'genuinely' to signal conviction, then back it up.", tags: ["conviction"] },
+        { s: "From where I stand, the risk of inaction is greater than the risk of moving forward.", n: "Powerful for pushing decisions. Corporate and crisp.", tags: ["assertive", "corporate"] },
+        { s: "I may be wrong about this, but my instinct tells me there's something important here.", n: "Hedging while still asserting — balanced and intelligent.", tags: ["balanced"] },
+        { s: "The way I see it, both options have merit — but one aligns better with our core goal.", n: "Shows you've weighed both sides before choosing.", tags: ["analytical"] },
+      ]
+    },
+    {
+      cat: "Handling Disagreement Gracefully",
+      items: [
+        { s: "I understand where you're coming from, and I respect that perspective — though I see it differently.", n: "Disagree without dismissing. The gold standard phrase.", tags: ["disagreement", "respect"] },
+        { s: "That's one way to look at it — another angle worth considering is this.", n: "Introduces your counter-view without confrontation.", tags: ["alternative view"] },
+        { s: "I'd push back slightly on that — not to disagree entirely, but to add some nuance.", n: "Signals healthy debate, not conflict.", tags: ["pushback"] },
+        { s: "We may have to agree to disagree on this one — and that's perfectly fine.", n: "Closes a debate respectfully when no consensus is needed.", tags: ["closing"] },
+      ]
+    },
+    {
+      cat: "Buying Time to Think",
+      items: [
+        { s: "That's a thought-provoking question — let me think about it for a moment.", n: "Never say 'um'. Replace it with this — instantly sounds more intelligent.", tags: ["buying time"] },
+        { s: "Off the top of my head, I'd say — but I'd want to verify this before committing.", n: "Shows honesty and intellectual humility.", tags: ["honest"] },
+        { s: "Give me just a second — I want to make sure I frame this correctly.", n: "Signals you care about precision. Respected in any context.", tags: ["precision"] },
+      ]
+    }
+  ],
+
+  interview: [
+    {
+      cat: "About Yourself",
+      items: [
+        { s: "I'm a senior software engineer with a strong focus on system design and enterprise banking solutions — I enjoy building things that are both robust and scalable.", n: "Tailor the domain to your field. Lead with identity, not just job title.", tags: ["intro", "career"] },
+        { s: "Over the years, I've come to enjoy the intersection of technical depth and stakeholder communication — I find that the best engineers bridge those two worlds.", n: "Positions you as well-rounded. Excellent for senior roles.", tags: ["leadership"] },
+        { s: "I've always been drawn to complex, high-stakes problems — the kind that require both careful thinking and decisive action.", n: "Signals appetite for challenge.", tags: ["motivation"] },
+        { s: "My career has been shaped by a constant curiosity — I don't just want to build things, I want to understand why they're built a certain way.", n: "Shows depth. Good for senior and architect roles.", tags: ["growth mindset"] },
+      ]
+    },
+    {
+      cat: "Answering Behavioural Questions (STAR)",
+      items: [
+        { s: "The situation was fairly complex — we had a tight deadline, conflicting stakeholder requirements, and a team that was partially new to the domain.", n: "Sets up STAR format naturally. Paints context without over-explaining.", tags: ["STAR", "behavioural"] },
+        { s: "The action I took was not the most popular one initially — but I made the case clearly, and the team came around once they saw the rationale.", n: "Shows leadership and courage.", tags: ["leadership", "STAR"] },
+        { s: "Looking back, I'd handle one thing differently — but the outcome at the time was the best we could have achieved given the constraints.", n: "Shows reflection and maturity — interviewers love this.", tags: ["reflection"] },
+        { s: "The result was significant — we reduced processing time by 40%, and more importantly, the team felt more confident in the system architecture.", n: "Quantify where possible. Mention team impact too.", tags: ["results"] },
+      ]
+    },
+    {
+      cat: "Handling Tough Interview Questions",
+      items: [
+        { s: "That's an area I've been actively developing — I won't pretend it's a strength yet, but here's how I'm approaching it.", n: "Honest and proactive. Much better than faking strength.", tags: ["weakness", "honest"] },
+        { s: "My current role has taught me a great deal — but I'm at a point where I want to take on challenges that stretch me further.", n: "Why leaving: framed positively, without criticising anyone.", tags: ["why leaving"] },
+        { s: "I'm looking for a role where I can contribute at a high level while also continuing to grow — I think this position offers both.", n: "Classic answer, but confident delivery makes all the difference.", tags: ["motivation"] },
+        { s: "The gap in my experience is real — but here's why I believe the skills I do have are highly transferable to this context.", n: "Address gaps head-on. Never dodge. Redirect with confidence.", tags: ["gap handling"] },
+        { s: "I'm the kind of person who functions best when I have clear goals, high autonomy, and a team I genuinely trust.", n: "Shows self-awareness about your working style.", tags: ["self-awareness"] },
+      ]
+    },
+    {
+      cat: "Closing the Interview",
+      items: [
+        { s: "Before we wrap up — is there anything about my background or experience that gives you pause? I'd rather address it now.", n: "Bold and impressive close. Few candidates do this.", tags: ["closing"] },
+        { s: "I'm genuinely excited about this opportunity — the work aligns closely with what I want to be doing over the next few years.", n: "Express authentic interest. Vague enthusiasm is less credible.", tags: ["enthusiasm"] },
+        { s: "Could you tell me more about what success looks like in this role in the first six months?", n: "Great question — shows you're thinking about delivery, not just getting the job.", tags: ["question to ask"] },
+      ]
+    }
+  ],
+
+  debate: [
+    {
+      cat: "Opening Your Argument",
+      items: [
+        { s: "The position I'd like to defend today is this — and I'll walk you through the reasoning step by step.", n: "Clear, structured. Sets up a confident argument.", tags: ["opening"] },
+        { s: "Before I make my case, I want to acknowledge what I think is genuinely strong about the opposing view.", n: "Shows intellectual fairness. Builds credibility before you even argue.", tags: ["fairness"] },
+        { s: "The data here is fairly clear — but I want to focus on what I think is the more important question underneath it.", n: "Elevates your argument above just facts.", tags: ["framing"] },
+        { s: "I'll be direct: I think this approach is fundamentally flawed — and I'll explain why.", n: "When you want to be assertive from the start. Confident, not aggressive.", tags: ["assertive"] },
+      ]
+    },
+    {
+      cat: "Responding to Others",
+      items: [
+        { s: "That was well-argued — I'll concede that point. However, it doesn't change the central issue I'm raising.", n: "Conceding gracefully while holding your ground. Very powerful.", tags: ["concession"] },
+        { s: "I'd like to build on what was just said — because I think it actually supports my argument.", n: "Turning someone else's point to your advantage.", tags: ["redirect"] },
+        { s: "With respect, I think that argument conflates two separate issues — let me try to untangle them.", n: "Signals precision. Use when someone is mixing up two points.", tags: ["clarifying"] },
+        { s: "That's a valid concern — but it's worth asking whether it applies in this specific context.", n: "Challenges applicability without rejecting the point outright.", tags: ["challenge"] },
+        { s: "I hear the concern, and I take it seriously. My response is this.", n: "Use this when emotions are running high. De-escalates and redirects.", tags: ["de-escalate"] },
+      ]
+    },
+    {
+      cat: "Strengthening Your Position",
+      items: [
+        { s: "The evidence points in one direction here — and I think it's important we don't let anecdotes override the pattern.", n: "Redirects discussion from personal stories to data.", tags: ["evidence"] },
+        { s: "Even if we accept the strongest version of the opposing argument — which I don't — it still doesn't resolve the core issue.", n: "Steelmanning: shows intellectual confidence.", tags: ["steelman"] },
+        { s: "Let me test this with a concrete example — because abstract arguments can sometimes obscure the real stakes.", n: "Grounds the debate. Audiences respond well to examples.", tags: ["examples"] },
+        { s: "The question isn't whether this is a problem — we all agree it is. The real question is what the most effective solution looks like.", n: "Reframes disagreement around shared purpose.", tags: ["reframing"] },
+      ]
+    },
+    {
+      cat: "Closing & Summarising",
+      items: [
+        { s: "To summarise my position in three points — because I want to make sure the argument is clear.", n: "Structured close. Always lands well.", tags: ["summary"] },
+        { s: "I think we've had a genuinely productive discussion — even if we haven't fully agreed, we've sharpened the thinking.", n: "Respectful close. Good for meetings and panel discussions.", tags: ["close"] },
+        { s: "My conclusion stands — not because I'm unwilling to be persuaded, but because I haven't yet heard a compelling counter to the core argument.", n: "Holds position while remaining intellectually open.", tags: ["firm close"] },
+      ]
+    }
+  ],
+
+  presentation: [
+    {
+      cat: "Powerful Openings",
+      items: [
+        { s: "Let me start with a question — because I think it gets to the heart of what we're here to discuss today.", n: "Engages audience immediately. Much stronger than 'Hello, my name is...'", tags: ["hook"] },
+        { s: "What I'm about to share challenged some assumptions I'd held for a long time — and I think it might do the same for you.", n: "Creates curiosity. Sets up a journey.", tags: ["intrigue"] },
+        { s: "In the next fifteen minutes, I want to walk you through three ideas that I believe will change how you think about this problem.", n: "Gives a roadmap upfront. Audiences love knowing what's coming.", tags: ["roadmap"] },
+        { s: "I'll be honest — when I first encountered this, I wasn't convinced either. Let me show you what changed my mind.", n: "Disarming honesty. Great for persuasive presentations.", tags: ["honest open"] },
+      ]
+    },
+    {
+      cat: "Guiding the Audience",
+      items: [
+        { s: "Before I go further — does that make sense so far, or should I clarify?", n: "Pause and check in. Shows confidence — insecure speakers never do this.", tags: ["check-in"] },
+        { s: "Now, you might be wondering — why does this matter? Here's the answer.", n: "Anticipates audience questions. Makes you seem well-prepared.", tags: ["anticipate"] },
+        { s: "Let me zoom out for a moment and connect this back to the bigger picture.", n: "Use when you've been in detail — pull back for perspective.", tags: ["zooming out"] },
+        { s: "This is the key slide — everything we've discussed so far leads to this point.", n: "Signals importance. Makes the audience pay attention.", tags: ["emphasis"] },
+        { s: "I know that was a lot to take in — so let me give you the one-sentence version.", n: "Simplifies without dumbing down. Very effective.", tags: ["simplify"] },
+      ]
+    },
+    {
+      cat: "Handling Q&A",
+      items: [
+        { s: "That's a great question — and it's one I thought about as well. Here's how I'd approach it.", n: "Validate before answering. Never jump straight to the answer.", tags: ["Q&A"] },
+        { s: "I don't have a definitive answer to that right now — but let me tell you what I do know, and I'll follow up with more detail.", n: "Honest and confident. Never bluff.", tags: ["honest answer"] },
+        { s: "Let me make sure I understand the question correctly — are you asking about X, or is it more about Y?", n: "Clarify before answering. Shows precision and care.", tags: ["clarify question"] },
+        { s: "That actually goes slightly beyond the scope of today's talk — but it's a really important thread to pull on. Can we take it offline?", n: "Manages scope gracefully without dismissing the questioner.", tags: ["scope handling"] },
+      ]
+    },
+    {
+      cat: "Memorable Closings",
+      items: [
+        { s: "I want to leave you with one thought — not a summary, but a question worth sitting with.", n: "Ends on reflection, not just recap. Memorable and distinctive.", tags: ["closing"] },
+        { s: "The next step is clear — and it's small enough to take today.", n: "Ends with a call to action. Specific and actionable.", tags: ["call to action"] },
+        { s: "Thank you for your time and attention — this conversation has genuinely shaped how I think about this too.", n: "Warm, genuine close. Not the generic 'thank you for listening'.", tags: ["close"] },
+        { s: "I'm excited about where this leads — and I hope you are too. Let's make it happen.", n: "Energetic, forward-looking. Perfect for pitches and proposals.", tags: ["inspiring close"] },
+      ]
+    }
+  ],
+
+  transitions: [
+    {
+      cat: "Adding Information",
+      items: [
+        { s: "Building on that — there's another dimension worth considering here.", n: "Elegant way to add a new point.", tags: ["adding"] },
+        { s: "What makes this particularly interesting is the following.", n: "Signals depth and engagement.", tags: ["elaborating"] },
+        { s: "And to take that one step further —", n: "Great connector when deepening an argument.", tags: ["deepening"] },
+        { s: "Not only that — but there's a related point that reinforces this.", n: "Classic 'not only...but also' structure, naturally spoken.", tags: ["reinforcing"] },
+      ]
+    },
+    {
+      cat: "Introducing Contrast",
+      items: [
+        { s: "That said — and I think this is important — there's a meaningful counterargument here.", n: "Smooth pivot to the other side.", tags: ["contrast"] },
+        { s: "On the other hand, if we look at this from a different angle —", n: "Clean contrast phrase.", tags: ["contrast"] },
+        { s: "While that's largely true, the exception worth noting is this.", n: "Adds nuance without full contradiction.", tags: ["nuance"] },
+        { s: "Despite that, I'd still argue the overall trend points in the other direction.", n: "Holds position while acknowledging a challenge.", tags: ["holding position"] },
+      ]
+    },
+    {
+      cat: "Summarising & Concluding",
+      items: [
+        { s: "So to bring this together —", n: "Clean transition into a summary.", tags: ["summary"] },
+        { s: "The bottom line, as I see it, is this.", n: "Signals you're giving your core conclusion.", tags: ["conclusion"] },
+        { s: "In short — and I want to keep this simple —", n: "Great for simplifying a complex point.", tags: ["simplify"] },
+        { s: "If I had to distil this down to one idea, it would be this.", n: "Memorable way to close any argument or explanation.", tags: ["key idea"] },
+      ]
+    },
+    {
+      cat: "Intelligent Filler Phrases (Replace 'Um')",
+      items: [
+        { s: "That's worth pausing on for a second.", n: "Use when you need a moment to gather your thought.", tags: ["filler", "buying time"] },
+        { s: "Let me think about how to put this most accurately.", n: "Shows precision — much better than hesitation.", tags: ["filler"] },
+        { s: "The way I'd frame it is this.", n: "Signals you're about to give a considered answer.", tags: ["framing"] },
+        { s: "What I mean more precisely is —", n: "Use to self-correct or clarify. Shows articulateness.", tags: ["correction"] },
+        { s: "And this is where it gets interesting.", n: "Keeps energy up when transitioning to a new point.", tags: ["energy", "filler"] },
+      ]
+    },
+    {
+      cat: "Showing Confidence Without Arrogance",
+      items: [
+        { s: "I could be wrong — but my reading of the evidence is fairly clear.", n: "Epistemic humility + confidence. A rare and respected balance.", tags: ["confidence"] },
+        { s: "I've thought about this a fair amount, and here's where I've landed.", n: "Signals considered opinion without overstatement.", tags: ["confidence"] },
+        { s: "I'll say this carefully — because I want to be precise, not just assertive.", n: "Slows you down. Makes every word feel chosen.", tags: ["precision"] },
+        { s: "I stand behind this — not out of stubbornness, but because I think the reasoning is sound.", n: "Defends position with grace.", tags: ["standing firm"] },
+      ]
+    }
+  ]
+};
+
+let state = {};
+
+function initState() {
+  Object.keys(DATA).forEach(tab => {
+    state[tab] = state[tab] || {};
+  });
+}
+
+function getTotalCards(tab) {
+  return DATA[tab].reduce((acc, cat) => acc + cat.items.length, 0);
+}
+
+function getDoneCount(tab) {
+  return Object.values(state[tab] || {}).filter(Boolean).length;
+}
+
+function updateProgress(tab) {
+  const total = getTotalCards(tab);
+  const done = getDoneCount(tab);
+  const pct = total ? (done / total * 100) : 0;
+  document.getElementById(`fill-${tab}`).style.width = pct + '%';
+  document.getElementById(`count-${tab}`).textContent = `${done} / ${total}`;
+}
+
+function toggleCard(tab, key, btn) {
+  state[tab][key] = !state[tab][key];
+  const card = btn.closest('.card');
+  card.classList.toggle('done', state[tab][key]);
+  btn.textContent = state[tab][key] ? '✓' : '';
+  updateProgress(tab);
+}
+
+function renderTab(tab) {
+  const container = document.getElementById(`cards-${tab}`);
+  if (!container || container.dataset.rendered) return;
+  container.dataset.rendered = '1';
+
+  let globalIdx = 0;
+  DATA[tab].forEach(cat => {
+    const catEl = document.createElement('div');
+    catEl.className = 'cat-label';
+    catEl.textContent = cat.cat;
+    container.appendChild(catEl);
+
+    cat.items.forEach((item, i) => {
+      globalIdx++;
+      const key = `${cat.cat}-${i}`;
+      const card = document.createElement('div');
+      card.className = 'card' + (state[tab][key] ? ' done' : '');
+      card.innerHTML = `
+        <div class="card-num">${String(globalIdx).padStart(2,'0')}</div>
+        <div class="card-body">
+          <div class="card-sentence">"${item.s}"</div>
+          <div class="card-note">${item.n}</div>
+          <div class="card-tags">${(item.tags||[]).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+        <button class="check-btn" onclick="toggleCard('${tab}','${key}',this)">${state[tab][key] ? '✓' : ''}</button>
+      `;
+      container.appendChild(card);
+    });
+  });
+
+  // Tip box at bottom
+  const tips = {
+    everyday: "💡 Practice tip: Pick 5 sentences each morning and say them aloud 3 times each. Focus on rhythm and natural stress — not speed.",
+    interview: "💡 Practice tip: Record yourself answering an imaginary interview question using 2–3 of these phrases. Play it back. Notice where you hesitate.",
+    debate: "💡 Practice tip: Stand in front of a mirror. Say these with eye contact to your own reflection. Debate confidence is 60% posture.",
+    presentation: "💡 Practice tip: Combine an opening + a mid-point connector + a closing into a 60-second mini-presentation daily. This builds structure instincts.",
+    transitions: "💡 Practice tip: For one week, try replacing every 'um' and 'uh' with one of these phrases. It feels awkward at first — then it becomes natural."
+  };
+  if (tips[tab]) {
+    const tip = document.createElement('div');
+    tip.className = 'tip-box';
+    tip.innerHTML = `<strong>Coach's Tip</strong>${tips[tab]}`;
+    container.appendChild(tip);
+  }
+
+  // Reset button
+  const resetBtn = document.createElement('button');
+  resetBtn.className = 'reset-btn';
+  resetBtn.textContent = '↺ Reset progress for this section';
+  resetBtn.onclick = () => {
+    state[tab] = {};
+    container.dataset.rendered = '';
+    container.innerHTML = '';
+    renderTab(tab);
+    updateProgress(tab);
+  };
+  container.appendChild(resetBtn);
+
+  updateProgress(tab);
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`panel-${tab}`).classList.add('active');
+  event.currentTarget.classList.add('active');
+  renderTab(tab);
+}
+
+// Init
+initState();
+renderTab('everyday');
+</script>
+</body>
+</html>
