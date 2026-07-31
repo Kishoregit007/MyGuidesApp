@@ -14,6 +14,7 @@ const NatureGuide = lazy(() => import('./kp_true_nature_guide.jsx'))
 const SeniorEngineerChecklist = lazy(() => import('./SeniorEngineerChecklist.jsx'))
 const DomainInterviewPrep = lazy(() => import('./kp_interview_qa_v2.jsx'))
 const SpeakingFluency = lazy(() => import('./SpeakingFluency.jsx'))
+const DailyPowerRoutine = lazy(() => import('./kp_daily_power_guide.jsx'))
 
 export const GUIDES = [
   {
@@ -113,9 +114,16 @@ export const GUIDES = [
   },
   {
     id: 'nature-guide',
-    name: 'Nature Guide',
+    name: 'True Nature Guide',
     icon: '🌲',
     description: 'Guide to understanding and connecting with the natural world',
     component: NatureGuide
+  },
+  {
+    id: 'daily-power-routine',
+    name: 'Daily Power Routine',
+    icon: '⚡',
+    description: 'Guide to maximizing daily productivity and energy',
+    component: DailyPowerRoutine
   }
 ]
