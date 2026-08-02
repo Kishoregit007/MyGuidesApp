@@ -15,6 +15,8 @@ const SeniorEngineerChecklist = lazy(() => import('./SeniorEngineerChecklist.jsx
 const DomainInterviewPrep = lazy(() => import('./kp_interview_qa_v2.jsx'))
 const SpeakingFluency = lazy(() => import('./SpeakingFluency.jsx'))
 const DailyPowerRoutine = lazy(() => import('./kp_daily_power_guide.jsx'))
+const InterviewPrep = lazy(() => import('./interview_preparation.jsx'))
+const HexawareTech = lazy(() => import('./hexaware-prep.jsx'))
 
 export const GUIDES = [
   {
@@ -125,5 +127,21 @@ export const GUIDES = [
     icon: '⚡',
     description: 'Guide to maximizing daily productivity and energy',
     component: DailyPowerRoutine
+  },
+  {
+    id: 'interview',
+    name: 'Interview Preparation',
+    icon: '💼',
+    description: 'Preparation strategies for job interviews',
+    component: InterviewPrep,
+    children: [
+      {
+        id: 'HexawareTech',
+        name: 'Hexaware Technologies',
+        icon: '🏢',
+        description: 'Comprehensive guide for Hexaware Technologies',
+        component: HexawareTech
+      }
+    ]
   }
 ]

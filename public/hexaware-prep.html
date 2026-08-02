@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hexaware Walk-in // Readiness Console</title>
+<style>
+  :root{
+    --bg:#12151b;
+    --bg2:#1a1e26;
+    --card:#1d222b;
+    --line:#2b313d;
+    --text:#e7e6e1;
+    --text-dim:#9aa2b1;
+    --amber:#e8963c;
+    --amber-dim:#8a5f2a;
+    --teal:#4fd1c5;
+    --teal-dim:#2a6b64;
+    --red:#e5697b;
+    --green:#7fd88a;
+    --mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--teal);}
+
+  /* ===== Header / status strip ===== */
+  header{
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, #161a21, #12151b);
+    padding:22px 24px 18px;
+  }
+  .status-row{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:baseline; gap:10px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--green); box-shadow:0 0 8px var(--green); display:inline-block;}
+  .brand h1{font-size:15px; letter-spacing:.06em; text-transform:uppercase; margin:0; color:var(--text-dim); font-weight:600;}
+  .brand h1 b{color:var(--text); font-weight:700;}
+  .countdown{
+    font-family:var(--mono); display:flex; align-items:center; gap:10px; background:var(--card);
+    border:1px solid var(--line); padding:8px 16px; border-radius:8px;
+  }
+  .countdown .num{color:var(--amber); font-size:22px; font-weight:700;}
+  .countdown .lbl{font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em;}
+  .meta-line{max-width:1180px;margin:14px auto 0; font-family:var(--mono); font-size:12.5px; color:var(--text-dim); display:flex; gap:22px; flex-wrap:wrap;}
+  .meta-line span b{color:var(--text);}
+
+  /* ===== Tabs ===== */
+  nav.tabs{
+    position:sticky; top:0; z-index:10; background:var(--bg); border-bottom:1px solid var(--line);
+    overflow-x:auto; white-space:nowrap;
+  }
+  nav.tabs .inner{max-width:1180px; margin:0 auto; display:flex;}
+  nav.tabs button{
+    font-family:var(--sans); background:none; border:none; color:var(--text-dim);
+    padding:13px 16px; font-size:13px; cursor:pointer; border-bottom:2px solid transparent;
+    font-weight:600; letter-spacing:.01em;
+  }
+  nav.tabs button:hover{color:var(--text);}
+  nav.tabs button.active{color:var(--amber); border-bottom-color:var(--amber);}
+
+  main{max-width:1180px; margin:0 auto; padding:26px 24px 80px;}
+  .panel{display:none;}
+  .panel.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  h2.section-title{font-size:20px; margin:0 0 4px; color:var(--text);}
+  p.section-sub{color:var(--text-dim); margin:0 0 22px; font-size:13.5px; line-height:1.5;}
+
+  /* ===== Dashboard grid on overview ===== */
+  .grid-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin-bottom:28px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px;}
+  .card .card-num{font-family:var(--mono); font-size:26px; color:var(--amber); font-weight:700;}
+  .card .card-lbl{font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em; margin-top:4px;}
+
+  .kv{display:grid; grid-template-columns:150px 1fr; gap:8px 16px; font-size:14px; margin:8px 0;}
+  .kv div:nth-child(odd){color:var(--text-dim); font-family:var(--mono); font-size:12.5px; padding-top:2px;}
+  .kv div:nth-child(even){color:var(--text);}
+
+  .callout{background:#22242b; border-left:3px solid var(--amber); padding:12px 16px; border-radius:6px; font-size:13.5px; color:var(--text-dim); margin:14px 0;}
+  .callout b{color:var(--text);}
+  .callout.teal{border-left-color:var(--teal);}
+  .callout.red{border-left-color:var(--red);}
+
+  /* ===== Search ===== */
+  .search-bar{
+    display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line);
+    border-radius:8px; padding:9px 14px; margin-bottom:18px; max-width:420px;
+  }
+  .search-bar input{
+    background:none; border:none; outline:none; color:var(--text); font-size:13.5px; width:100%; font-family:var(--sans);
+  }
+  .search-bar input::placeholder{color:#5c6472;}
+  .search-count{font-size:11.5px; color:var(--text-dim); font-family:var(--mono);}
+
+  /* ===== Q&A cards ===== */
+  .qa{background:var(--card); border:1px solid var(--line); border-radius:10px; margin-bottom:10px; overflow:hidden;}
+  .qa summary{
+    list-style:none; cursor:pointer; padding:14px 18px; display:flex; gap:12px; align-items:flex-start;
+    font-size:14.5px; font-weight:600;
+  }
+  .qa summary::-webkit-details-marker{display:none;}
+  .qa summary .qnum{color:var(--amber); font-family:var(--mono); font-size:12px; flex-shrink:0; padding-top:2px;}
+  .qa summary::after{content:"+"; margin-left:auto; color:var(--text-dim); font-size:18px; font-weight:400;}
+  .qa[open] summary::after{content:"–";}
+  .qa .body{padding:0 18px 16px 46px; color:var(--text-dim); font-size:13.8px; line-height:1.65;}
+  .qa .body code, .qa .body .code-block{
+    font-family:var(--mono); background:#12151b; border:1px solid var(--line); border-radius:6px; padding:1px 6px; color:var(--teal); font-size:12.5px;
+  }
+  .qa .body pre{
+    font-family:var(--mono); background:#12151b; border:1px solid var(--line); border-radius:8px; padding:12px 14px;
+    overflow-x:auto; font-size:12.3px; color:#c9cdd6; line-height:1.55; margin:10px 0;
+  }
+  .tag{display:inline-block; font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
+    padding:2px 8px; border-radius:20px; margin-left:8px; border:1px solid var(--teal-dim); color:var(--teal); flex-shrink:0;}
+  .tag.hard{border-color:#8a3040; color:var(--red);}
+  .tag.core{border-color:var(--amber-dim); color:var(--amber);}
+
+  /* ===== Day plan ===== */
+  .day{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-bottom:12px;}
+  .day-head{display:flex; align-items:center; gap:12px; margin-bottom:8px;}
+  .day-head .dnum{font-family:var(--mono); color:var(--amber); font-size:13px; background:#2a1f14; border:1px solid var(--amber-dim); border-radius:6px; padding:3px 9px;}
+  .day-head h3{margin:0; font-size:15px;}
+  .day ul{margin:6px 0 0; padding-left:20px; color:var(--text-dim); font-size:13.8px; line-height:1.8;}
+  .day ul li b{color:var(--text);}
+
+  /* ===== Checklist ===== */
+  .checklist{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:6px; margin-bottom:16px;}
+  .check-item{display:flex; align-items:center; gap:12px; padding:10px 14px; border-bottom:1px solid var(--line); font-size:13.8px;}
+  .check-item:last-child{border-bottom:none;}
+  .check-item input{width:16px; height:16px; accent-color:var(--amber); flex-shrink:0; cursor:pointer;}
+  .check-item label{cursor:pointer; flex:1;}
+  .check-item.checked label{color:var(--text-dim); text-decoration:line-through;}
+
+  .progress-wrap{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:18px; display:flex; align-items:center; gap:16px;}
+  .progress-bar{flex:1; height:8px; background:#12151b; border-radius:10px; overflow:hidden; border:1px solid var(--line);}
+  .progress-fill{height:100%; background:linear-gradient(90deg, var(--amber-dim), var(--amber)); width:0%; transition:width .3s ease;}
+  .progress-pct{font-family:var(--mono); color:var(--amber); font-size:13px; font-weight:700; min-width:42px; text-align:right;}
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:720px){.two-col{grid-template-columns:1fr;} .kv{grid-template-columns:120px 1fr;}}
+
+  table.compare{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
+  table.compare th{text-align:left; color:var(--amber); font-family:var(--mono); font-size:11.5px; text-transform:uppercase; padding:8px 10px; border-bottom:1px solid var(--line);}
+  table.compare td{padding:8px 10px; border-bottom:1px solid var(--line); color:var(--text-dim); vertical-align:top;}
+  table.compare tr:last-child td{border-bottom:none;}
+
+  footer{text-align:center; color:#4a505c; font-size:11.5px; padding:30px 0 10px; font-family:var(--mono);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="status-row">
+    <div class="brand">
+      <span class="dot"></span>
+      <h1><b>HEXAWARE</b> · BACKEND DEV WALK-IN · READINESS CONSOLE</h1>
+    </div>
+    <div class="countdown">
+      <div>
+        <div class="num" id="cdNum">–</div>
+        <div class="lbl" id="cdLbl">days to walk-in</div>
+      </div>
+    </div>
+  </div>
+  <div class="meta-line">
+    <span>Role: <b>Backend Developer — Java / Spring Boot / Microservices</b></span>
+    <span>Format: <b>Walk-in, experienced hire (5–7 yr band typical)</b></span>
+    <span>Location: <b>Hyderabad</b></span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="inner" id="tabBar"></div>
+</nav>
+
+<main id="main"></main>
+
+<footer>Built offline · no data leaves this file · last synced against public listings, Aug 2026</footer>
+
+<script>
+/* ============================= DATA ============================= */
+
+const TARGET_DATE = new Date("2026-08-08T09:30:00"); // adjust if your actual slot differs
+
+const OVERVIEW_CARDS = [
+  {n:"3", l:"Interview Rounds Typical"},
+  {n:"45", l:"Q&A Items In This Guide"},
+  {n:"7", l:"Day Prep Plan"},
+  {n:"5–7yr", l:"Band This Slot Targets"},
+];
+
+const CORE_JAVA = [
+ {q:"What are virtual threads (Java 21) and why do they matter for a backend service?",
+  tags:["core"],
+  a:`Virtual threads are lightweight threads managed by the JVM rather than mapped 1:1 to OS threads. A platform thread is expensive (roughly 1MB stack, OS-scheduled); a virtual thread is cheap enough to spawn millions. The JVM parks a virtual thread when it blocks on I/O and reuses the underlying "carrier" OS thread for other work, so a thread-per-request model stops being wasteful.
+  <br><br>Tie this to your own experience: your Kafka consumers and REST integrations do a lot of blocking I/O (DB calls, downstream HTTP, SWIFT/NACH gateway calls) — virtual threads let you keep the simple synchronous programming model instead of rewriting everything in reactive/WebFlux just to get throughput. Mention: <code>Executors.newVirtualThreadPerTaskExecutor()</code>, and that virtual threads are NOT faster per-task — they win on scalability under high concurrency with blocking calls, not on raw CPU-bound speed.`},
+ {q:"record vs sealed class vs traditional POJO — when do you use each?",
+  tags:["core"],
+  a:`<b>record</b>: immutable data carrier, auto-generates constructor, accessors, equals/hashCode/toString. Best for DTOs, API request/response payloads, value objects (e.g. <code>record TxnRequest(String accountId, BigDecimal amount)</code>).
+  <br><br><b>sealed class/interface</b>: restricts which classes can implement/extend it (<code>permits</code> clause). Good for modelling a closed set of states, e.g. a payment status hierarchy (Pending, Settled, Failed) where you want the compiler to force exhaustive handling in a switch.
+  <br><br><b>traditional POJO/class</b>: still right when you need mutable state, JPA entities (though records are now usable in limited JPA contexts), or inheritance-heavy domain models.
+  <br><br>Good answer shape: "records for the wire/transport layer, sealed types for finite domain states, classes for entities and anything with lifecycle/mutation."`},
+ {q:"How does pattern matching for switch (Java 17+) work?",
+  tags:[],
+  a:`Switch can now match on type and deconstruct records, replacing chains of instanceof + casting.
+  <pre>String describe(Object txn) {
+    return switch (txn) {
+        case CardTxn c when c.amount().compareTo(BigDecimal.ZERO) < 0 -> "refund";
+        case CardTxn c -> "card charge: " + c.amount();
+        case UpiTxn u -> "upi: " + u.vpa();
+        case null -> "no transaction";
+        default -> "unknown";
+    };
+}</pre>
+  Combined with sealed interfaces, the compiler can enforce exhaustiveness — no default needed if every permitted subtype is covered. Good talking point for banking domain: modelling settlement states safely.`},
+ {q:"Explain the internal working of ConcurrentHashMap.",
+  tags:["core","hard"],
+  a:`Since Java 8, it no longer uses full-map segment locking. Structure: an array of bins (nodes); writes lock only the bin (via <code>synchronized</code> on the head node) being modified, not the whole map — reads are largely lock-free using volatile reads. Resizing is done cooperatively: multiple threads can help transfer nodes to the new table. Bins that grow too large (treeify threshold, default 8) convert from a linked list to a red-black tree for O(log n) lookup instead of O(n).
+  <br><br>Contrast with <code>Hashtable</code> (locks entire table) and synchronized <code>HashMap</code> wrapper (same problem). Good follow-up: why you'd pick it for a shared in-memory cache/counter in a Kafka consumer vs. using an external cache like Redis.`},
+ {q:"CompletableFuture.thenApply() vs thenCompose() — what's the difference?",
+  tags:[],
+  a:`<b>thenApply</b>: transforms the result with a plain function, <code>T -> R</code>. Use when the next step is synchronous.
+  <br><b>thenCompose</b>: flattens — the function itself returns another CompletableFuture, <code>T -> CompletableFuture&lt;R&gt;</code>. Use when chaining another async call, otherwise you'd end up with a nested <code>CompletableFuture&lt;CompletableFuture&lt;R&gt;&gt;</code>.
+  <pre>// thenApply — sync transform
+future.thenApply(id -> id.toUpperCase());
+
+// thenCompose — chaining another async call
+future.thenCompose(id -> accountService.fetchAsync(id));</pre>
+  It's the classic map vs flatMap distinction, same idea as Optional/Stream.`},
+ {q:"What are text blocks and when should you use them?",
+  tags:[],
+  a:`Triple-quoted multi-line strings (<code>"""</code>) that preserve formatting without escape-hell. Common real use: embedding a JSON payload for a test, a SQL query, or a Kafka message template inline without string concatenation. Not a performance feature — purely readability.`},
+ {q:"Java memory management: G1 vs ZGC — how do you decide?",
+  tags:["hard"],
+  a:`<b>G1 (Garbage First)</b>: default since Java 9. Divides heap into regions, collects the ones with most garbage first. Good general-purpose collector, pause times typically tens to low hundreds of ms, scales to multi-GB heaps.
+  <br><br><b>ZGC</b>: designed for very large heaps (multi-GB to TB) with sub-millisecond pause targets, using colored pointers and load barriers to do almost all work concurrently with the application.
+  <br><br>Framing for a banking platform answer: G1 is fine for most transactional services; you'd reach for ZGC/Shenandoah only if you have a latency-critical path (e.g. a real-time fraud-scoring or settlement service) where even G1's pause tail is unacceptable, and you can spare the extra CPU overhead concurrent collection costs.`},
+ {q:"Why does correctly overriding equals() and hashCode() matter?",
+  tags:["core"],
+  a:`Contract: if <code>a.equals(b)</code> is true, <code>a.hashCode() == b.hashCode()</code> must also be true (not the reverse). Break this and objects silently vanish or duplicate inside HashMap/HashSet/HashTable-backed structures — classic bug: a custom key class used in a cache map that "randomly" fails to hit. With records this is generated correctly for you automatically, which is itself a good reason to mention when discussing record vs POJO trade-offs.`},
+ {q:"Fail-fast vs fail-safe iterators — what's the difference?",
+  tags:[],
+  a:`<b>Fail-fast</b> (ArrayList, HashMap, etc.): keeps a modCount; if the collection is structurally modified during iteration (outside the iterator's own remove), throws <code>ConcurrentModificationException</code>.
+  <br><b>Fail-safe</b> (CopyOnWriteArrayList, ConcurrentHashMap's iterator): iterates over a snapshot or is designed for concurrent structural change, so no exception — but you may not see the latest updates during that iteration. Good answer closer: "fail-safe isn't free — CopyOnWriteArrayList pays a copy cost on every write, so it's for read-heavy, rarely-mutated collections like listener lists, not general-purpose concurrent collections."`},
+ {q:"How would you handle a producer-consumer scenario with backpressure in plain Java (no framework)?",
+  tags:["hard"],
+  a:`BlockingQueue (ArrayBlockingQueue for bounded capacity) is the canonical answer — <code>put()</code> blocks the producer when full, <code>take()</code> blocks the consumer when empty, which is backpressure by construction. Mention this is conceptually what Kafka gives you at the broker level (consumer lag as backpressure signal) — good bridge to your Kafka experience since interviewers like when you connect low-level Java concurrency to the distributed systems you actually operate.`},
+];
+
+const SPRING_BOOT = [
+ {q:"How does Spring Boot auto-configuration work internally?",
+  tags:["core","hard"],
+  a:`Driven by <code>@EnableAutoConfiguration</code> (pulled in via <code>@SpringBootApplication</code>). At startup, Spring Boot reads <code>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</code> (older versions: <code>spring.factories</code>) listing candidate <code>@Configuration</code> classes. Each is guarded by conditional annotations:
+  <ul style="margin:8px 0 0 4px;">
+  <li><code>@ConditionalOnClass</code> — only apply if a given class is on the classpath (e.g. DataSource auto-config only fires if a JDBC driver is present)</li>
+  <li><code>@ConditionalOnMissingBean</code> — back off if you've already defined your own bean of that type</li>
+  <li><code>@ConditionalOnProperty</code> — gated by a config property</li>
+  </ul>
+  Net effect: "convention over configuration" — sensible defaults wire themselves in, and you override just by defining your own bean or property, without editing framework code. Good to mention <code>@AutoConfigureAfter/@AutoConfigureBefore</code> for ordering if pushed deeper.`},
+ {q:"Constructor injection vs field injection — which is preferred and why?",
+  tags:["core"],
+  a:`<b>Constructor injection is preferred.</b> Reasons interviewers want to hear:
+  <ul style="margin:8px 0 0 4px;">
+  <li>Makes dependencies explicit and immutable (<code>final</code> fields) — no way to construct the object in a half-wired state</li>
+  <li>Enables unit testing without a Spring context — just call <code>new MyService(mockDep)</code></li>
+  <li>Surfaces circular dependencies at compile/startup time instead of hiding them behind lazy field injection</li>
+  <li>Works cleanly with immutability and doesn't need <code>@Autowired</code> on every field</li>
+  </ul>
+  Field injection (<code>@Autowired</code> on the field) is concise but hides dependencies, can't be final, breaks easily in tests, and can mask circular dependency issues. With one constructor and Spring Boot 4.3+/Lombok's <code>@RequiredArgsConstructor</code>, you don't even need <code>@Autowired</code> explicitly.`},
+ {q:"How do you implement centralized exception handling in Spring Boot?",
+  tags:["core"],
+  a:`<code>@ControllerAdvice</code> (or <code>@RestControllerAdvice</code> for REST APIs, which also implies <code>@ResponseBody</code>) + <code>@ExceptionHandler</code> methods per exception type:
+  <pre>@RestControllerAdvice
+public class ApiExceptionHandler {
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleNotFound(AccountNotFoundException ex) {
+        return ResponseEntity.status(404)
+            .body(new ErrorResponse("ACCOUNT_NOT_FOUND", ex.getMessage()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleGeneric(Exception ex) {
+        return ResponseEntity.status(500)
+            .body(new ErrorResponse("INTERNAL_ERROR", "Unexpected error"));
+    }
+}</pre>
+  Good add-ons to mention: a consistent error response schema (code, message, traceId), mapping validation errors from <code>MethodArgumentNotValidException</code> to field-level messages, and correlating the traceId with your logging/observability stack (directly your territory) so support can jump from an error response straight to the trace.`},
+ {q:"Explain the Spring Bean lifecycle.",
+  tags:[],
+  a:`Instantiate → populate properties/dependency injection → <code>BeanNameAware</code>/<code>BeanFactoryAware</code> callbacks → <code>@PostConstruct</code> / <code>InitializingBean.afterPropertiesSet()</code> → bean ready for use → on shutdown, <code>@PreDestroy</code> / <code>DisposableBean.destroy()</code>. BeanPostProcessors can hook in before and after initialization (this is how proxies for <code>@Transactional</code>, <code>@Async</code>, AOP get woven in).`},
+ {q:"@Transactional — what can silently go wrong with it?",
+  tags:["hard"],
+  a:`Classic gotchas interviewers probe for at senior level:
+  <ul style="margin:8px 0 0 4px;">
+  <li><b>Self-invocation</b>: calling a <code>@Transactional</code> method from another method in the same class bypasses the proxy — no transaction starts.</li>
+  <li><b>Checked exceptions</b>: by default only unchecked (RuntimeException) exceptions trigger rollback; a checked exception won't roll back unless you set <code>rollbackFor</code>.</li>
+  <li><b>Propagation misuse</b>: REQUIRES_NEW inside REQUIRED can silently create nested independent transactions — dangerous for financial writes where you assume atomicity across a call chain.</li>
+  <li><b>Long transactions holding connections</b> under load — ties directly to your connection-pool/observability background, good place to bring in real experience.</li>
+  </ul>`},
+ {q:"How do you secure a Spring Boot REST API? (Spring Security basics)",
+  tags:[],
+  a:`Typical answer shape: <code>SecurityFilterChain</code> bean configuring which endpoints are public vs authenticated, JWT bearer token validation via a custom filter or <code>OAuth2ResourceServer</code> config, method-level security with <code>@PreAuthorize</code>, and password/secret handling via a vault (not hardcoded properties) — the last point lands well given your banking/PCI-DSS background.`},
+ {q:"What's the difference between @Component, @Service, @Repository, @Controller?",
+  tags:["core"],
+  a:`Functionally near-identical (all are <code>@Component</code> stereotypes, all get picked up by component scanning) — the difference is semantic + tooling behavior. <code>@Repository</code> additionally enables Spring's exception translation (native DB exceptions → <code>DataAccessException</code> hierarchy). <code>@Controller</code> is treated specially by Spring MVC for request mapping. Use the specific one — it documents intent and gets you the extra behavior where it exists.`},
+ {q:"How would you configure resilience (retry, circuit breaker, timeout) for a downstream call in Spring Boot?",
+  tags:["hard"],
+  a:`Resilience4j is the modern standard (Hystrix is EOL). Typical stack for a call to a downstream banking gateway:
+  <pre>@CircuitBreaker(name = "swiftGateway", fallbackMethod = "fallback")
+@Retry(name = "swiftGateway")
+@TimeLimiter(name = "swiftGateway")
+public CompletableFuture&lt;SwiftResponse&gt; sendPayment(PaymentReq req) {
+    return CompletableFuture.supplyAsync(() -> gatewayClient.send(req));
+}</pre>
+  Talk through: closed → open → half-open state machine, why retry + circuit breaker together needs care (don't retry into an already-failing downstream and make it worse), and idempotency — critical for payment retries specifically, since a naive retry on a timeout (where the first call actually succeeded downstream) can double-post a transaction. This is a strong point to raise proactively given your NACH/SWIFT background.`},
+];
+
+const MICROSERVICES = [
+ {q:"How do your microservices discover and talk to each other?",
+  tags:["core"],
+  a:`Expect this framed around whatever stack Hexaware's client project uses — cover the landscape: client-side discovery (Eureka + Spring Cloud LoadBalancer), server-side/service-mesh discovery (Kubernetes Service + Istio/Linkerd), and API gateway as the external entry point (Spring Cloud Gateway / Kong / Nginx). Be ready to state a clear opinion: "for a Kubernetes-native platform I'd let the platform do discovery via Services/DNS and keep app code decoupled from a discovery client — less to maintain."`},
+ {q:"How do you handle distributed transactions across microservices — e.g. a payment that touches 3 services?",
+  tags:["hard","core"],
+  a:`This is very likely to come up given your NACH/SWIFT/UPI background — have a crisp answer ready.
+  <br><br><b>Saga pattern</b> is the standard answer: break the transaction into a sequence of local transactions, each publishing an event that triggers the next step. Two flavors:
+  <ul style="margin:8px 0 0 4px;">
+  <li><b>Choreography</b> — services react to each other's events (via Kafka), no central coordinator. Simpler, but harder to trace the overall flow.</li>
+  <li><b>Orchestration</b> — a saga orchestrator service explicitly drives each step and compensating action. Easier to reason about and monitor, adds a component.</li>
+  </ul>
+  Compensating transactions (not rollback — you can't rollback another service's committed DB) undo completed steps if a later step fails (e.g. reverse a debit if the credit leg fails). Mention outbox pattern for reliably publishing the event in the same local transaction as the DB write, avoiding the dual-write problem — this is a strong senior-level detail.`},
+ {q:"How do you ensure idempotency in a microservice that consumes Kafka events?",
+  tags:["core"],
+  a:`Given your Kafka background this should be a strength — lead with it. Options: idempotency key (client-generated request ID) stored with a unique constraint before processing; consumer-side dedup table keyed by Kafka partition+offset or event ID; or leaning on exactly-once semantics (transactional producer + read_committed consumer) where the platform supports it, while still keeping app-level idempotency as defense-in-depth because "exactly once" delivery doesn't protect against a service processing the same logical event twice due to a redeploy/rebalance replay.`},
+ {q:"Explain the circuit breaker pattern and its states.",
+  tags:[],
+  a:`<b>Closed</b>: calls flow normally, failures counted. <b>Open</b>: once failure threshold crossed, calls fail fast immediately (no call to downstream) for a configured wait duration — protects the struggling downstream from being hammered further and protects your own thread pool from filling with hung calls. <b>Half-open</b>: after the wait, a limited number of trial calls go through; success closes the breaker again, failure reopens it. Resilience4j is the standard Java implementation now.`},
+ {q:"How would you design centralized logging/tracing across microservices?",
+  tags:["core"],
+  a:`This is squarely your domain — bring real depth. Correlation/trace ID generated at the edge (API gateway or first service), propagated through headers (or automatically via OpenTelemetry context propagation) across every downstream call and Kafka message header, so one transaction can be reconstructed across services in a tool like Jaeger/Zipkin/Grafana Tempo. Structured JSON logs shipped to an ELK/Loki stack, correlated by that trace ID. For metrics: RED (Rate, Errors, Duration) per service exposed via Micrometer → Prometheus → Grafana. This is a place to visibly out-perform other candidates since it's your actual daily work.`},
+ {q:"Monolith vs microservices — when would you NOT recommend microservices?",
+  tags:[],
+  a:`Good senior answer avoids the trend-following trap: microservices add real cost — network latency, distributed debugging, eventual consistency, operational overhead (more deployables, more monitoring surface). Not worth it for a small team, a low-complexity domain, or when the org lacks the DevOps maturity (CI/CD, observability, on-call practices) to run many services well. A modular monolith with clean internal boundaries is often the right intermediate step, splitting out services only where you have a genuine independent-scaling or independent-deployment need.`},
+ {q:"How do you handle API versioning in microservices?",
+  tags:[],
+  a:`Options to name: URI versioning (<code>/v1/accounts</code>) — simplest, most visible; header/media-type versioning — cleaner URLs but less discoverable; and for events (Kafka), schema evolution via a schema registry (Avro/Protobuf) with backward/forward compatibility rules so consumers and producers can deploy independently.`},
+ {q:"Containerization/deployment: what does your CI/CD pipeline for a Spring Boot microservice look like?",
+  tags:[],
+  a:`Expect a practical walkthrough, not theory: build (Maven/Gradle) → unit + integration tests → Docker image build (multi-stage build to keep image small) → push to registry → deploy via Helm/ArgoCD to Kubernetes → health checks (Spring Actuator's <code>/health</code> readiness/liveness probes) gate traffic cutover. Mention blue-green or canary if you've done it — strong signal at senior level.`},
+];
+
+const SYSTEM_DESIGN = [
+ {q:"Design a payment processing microservice (classic prompt — expect a variant of this).",
+  tags:["hard","core"],
+  a:`Structure your answer top-down, out loud, in this order — interviewers score the process as much as the answer:
+  <ol style="margin:8px 0 0 4px; padding-left:16px;">
+  <li><b>Clarify scope</b>: sync or async settlement? What rails (UPI/NACH/SWIFT-style)? Expected TPS? — asking this first is itself a signal of seniority.</li>
+  <li><b>High-level flow</b>: API gateway → Payment Service (validates, writes intent) → publishes event → downstream Ledger/Settlement service → notification service. Draw the boxes verbally.</li>
+  <li><b>Data</b>: payment intent table with idempotency key + status enum (PENDING/PROCESSING/SETTLED/FAILED), outbox table for reliable event publish.</li>
+  <li><b>Failure handling</b>: saga/compensation for multi-step failure, retry with idempotency, dead-letter queue for poison messages.</li>
+  <li><b>Non-functionals</b>: idempotency, exactly-once-ish delivery, audit trail (regulatory requirement — RBI angle you already know), observability, rate limiting per client.</li>
+  </ol>
+  You have unusually strong material for this one — it's close to your actual job. Don't undersell it; narrate it like you're describing a system you've actually operated.`},
+ {q:"How do you approach a system design question when the requirements are vague?",
+  tags:[],
+  a:`State assumptions out loud and ask 2-3 clarifying questions before designing (scale, consistency requirements, read/write ratio). Interviewers at this level are checking whether you jump straight to a diagram (junior signal) or negotiate the requirements first (senior signal). If they say "just assume something reasonable," say what you're assuming and move on — don't stall.`},
+ {q:"Be ready to walk through YOUR own project in architecture-diagram depth.",
+  tags:["core"],
+  a:`This is the single highest-leverage prep item — technical rounds for experienced hires spend real time here. Prepare a tight 3-minute narrative for your strongest recent project covering: the business problem, why the architecture looked the way it did (trade-offs, not just components), your specific ownership (be honest and specific — "I owned the Kafka consumer group rebalancing fix" beats "I worked on the team that built..."), a concrete incident you debugged and how (great place for your observability background), and one thing you'd redesign now with hindsight. That last part specifically signals seniority — it shows you're not just describing what happened but critically evaluating it.`},
+];
+
+const BEHAVIORAL = [
+ {q:"Tell me about yourself.",
+  tags:["core"],
+  a:`For a walk-in with limited time, keep it to ~90 seconds, structured: current role + years of experience + core stack (Java/Spring Boot/microservices/Kafka) → one or two things you're known for on your team (e.g. observability, performance tuning, banking-domain depth) → why you're exploring a move now (keep neutral/forward-looking, not a complaint about your current employer) → what you're looking for next. Practice this out loud at least twice before the day — walk-ins move fast and a rambling opener costs you time and momentum.`},
+ {q:"Why are you looking to leave your current organization?",
+  tags:["core"],
+  a:`Keep it forward-facing, never negative about the current employer by name. Safe framing: growth/scope ("I want deeper ownership of X"), stack/domain interest, or stability of role type — never bring up compensation as the primary driver even if it's real, and never criticize current management, even lightly; interviewers read that as a future risk signal about how you'll talk about them later.`},
+ {q:"Why Hexaware?",
+  tags:[],
+  a:`Have 2-3 specific, checkable reasons, not generic ones. Legitimate ones for this profile: Hexaware's re-listing on NSE/BSE in Feb 2025 and scale (32,000+ employees, IT services + BPO + consulting across ~25 countries) signals stability; if you know or can find the specific client/account this req sits under, mention the domain fit (many Hexaware Java/Spring Boot reqs are for banking/financial-services clients, which plays directly to your existing domain depth). Avoid "great learning opportunity" as your only answer — too generic to differentiate you.`},
+ {q:"Are you okay with the notice period / immediate joining expectation?",
+  tags:["core"],
+  a:`Walk-ins often skew toward candidates who can join fast. Know your actual notice period cold before you walk in, and if it's the standard 60-90 days for a senior banking-tech role, be upfront rather than vague — recruiters would rather know now than have an offer fall through later. If you have any buyout/negotiation flexibility, mention it proactively.`},
+ {q:"What's your expected CTC?",
+  tags:[],
+  a:`Know your current fixed + variable breakdown precisely, and have a number ready rather than "market standard" — vague answers cost you negotiation leverage in a walk-in setting where decisions move fast. A reasonable anchor: current CTC + 25-35% for a lateral senior move, adjusted for what you learn about the role's scope during the technical rounds.`},
+ {q:"Describe a conflict with a teammate or a difficult production incident — what did you do?",
+  tags:[],
+  a:`Use a real, specific incident (you clearly have several from banking-platform work). Structure: situation → what you specifically did (not "we") → outcome with a number if possible (reduced MTTR, prevented X) → what changed afterward (a process, a runbook, a monitoring rule) so it reads as learning, not just firefighting.`},
+];
+
+const CHECKLIST_DOCS = [
+ "Updated resume — 5+ printed copies",
+ "Government photo ID (Aadhaar/PAN/passport)",
+ "Passport-size photographs (2-3)",
+ "Latest 3 months' payslips (often asked at offer stage, safer to carry)",
+ "Relieving/experience letters from past employers",
+ "Educational certificates — originals + photocopies",
+ "PAN card copy",
+ "Any offer letter you're currently holding (if using for negotiation leverage)",
+];
+
+const CHECKLIST_LOGISTICS = [
+ "Confirm exact venue address and reporting time the evening before",
+ "Plan Hyderabad traffic buffer — arrive 30-45 min early for a walk-in queue",
+ "Know your current CTC breakdown (fixed/variable) and target number cold",
+ "Know your notice period exactly, and any negotiation room on it",
+ "Charge phone, carry a pen, wear formal/business-casual",
+ "Have 2-3 questions ready to ask the interviewer at the end (see Behavioral tab)",
+];
+
+const DAY_PLAN = [
+ {d:"Day 1", title:"Java core refresh + resume story", items:[
+   "Skim <b>Core Java</b> tab fully once — don't memorize, understand the 'why' behind each answer",
+   "Write your 90-second self-introduction and say it out loud 3 times",
+   "List your last 3 production incidents you can talk about in depth"
+ ]},
+ {d:"Day 2", title:"Spring Boot deep dive", items:[
+   "Go through <b>Spring Boot</b> tab — pay special attention to @Transactional gotchas and resilience config, these separate mid from senior candidates",
+   "If you have access to an IDE, actually write a small @RestControllerAdvice + Resilience4j example from memory — muscle memory beats reading"
+ ]},
+ {d:"Day 3", title:"Microservices + your domain edge", items:[
+   "Full pass on <b>Microservices</b> tab — the Saga/idempotency/observability questions are where your real experience should shine, prepare to go deep not shallow",
+   "Draft your architecture-diagram narrative for your strongest current project (see System Design tab)"
+ ]},
+ {d:"Day 4", title:"System design practice", items:[
+   "Do a full walkthrough of the payment-processing design prompt out loud, timed to ~8 minutes",
+   "Practice narrating your own project end-to-end without notes"
+ ]},
+ {d:"Day 5", title:"Mixed review + weak spots", items:[
+   "Use the search bar across Core Java / Spring Boot / Microservices tabs — re-read anything you hesitated on",
+   "Behavioral tab: rehearse 'why leaving', 'why Hexaware', and CTC answers out loud"
+ ]},
+ {d:"Day 6", title:"Light review + logistics", items:[
+   "Light pass only — no new material, just re-skim flagged questions",
+   "Print resume copies, prep documents (see Checklist tab), confirm venue/route",
+   "Get a full night's sleep — this matters more than one more hour of Q&A review"
+ ]},
+ {d:"Day 7 — Interview Day", title:"Execution", items:[
+   "Arrive early, documents in hand, phone charged",
+   "Before the technical round: mentally re-run your project narrative once",
+   "In the technical round: think out loud, state assumptions, don't rush to an answer",
+   "Ask your prepared questions at the end of each round — it signals genuine interest"
+ ]},
+];
+
+/* ============================= RENDER ============================= */
+
+const TABS = [
+  {id:"overview", label:"Overview"},
+  {id:"plan", label:"7-Day Plan"},
+  {id:"java", label:"Core Java"},
+  {id:"spring", label:"Spring Boot"},
+  {id:"micro", label:"Microservices"},
+  {id:"design", label:"System Design"},
+  {id:"behavioral", label:"Behavioral / HR"},
+  {id:"checklist", label:"Checklist"},
+];
+
+const tabBar = document.getElementById('tabBar');
+const main = document.getElementById('main');
+
+TABS.forEach((t,i)=>{
+  const btn = document.createElement('button');
+  btn.textContent = t.label;
+  btn.dataset.tab = t.id;
+  if(i===0) btn.classList.add('active');
+  btn.onclick = ()=>switchTab(t.id);
+  tabBar.appendChild(btn);
+});
+
+function switchTab(id){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', p.id==='panel-'+id));
+}
+
+function qaSection(list, containerId){
+  let html = `<div class="search-bar">
+    <span style="color:#5c6472">⌕</span>
+    <input type="text" placeholder="Search these questions…" oninput="filterQA('${containerId}', this.value)">
+  </div>
+  <div class="search-count" id="${containerId}-count" style="margin-bottom:14px;"></div>
+  <div id="${containerId}-list">`;
+  list.forEach((item, idx)=>{
+    html += `<details class="qa" data-q="${item.q.toLowerCase().replace(/"/g,'&quot;')}">
+      <summary><span class="qnum">Q${String(idx+1).padStart(2,'0')}</span>${item.q}
+        ${item.tags.map(t=>`<span class="tag ${t}">${t}</span>`).join('')}
+      </summary>
+      <div class="body">${item.a}</div>
+    </details>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+window.filterQA = function(containerId, val){
+  const q = val.toLowerCase();
+  const wrap = document.getElementById(containerId+'-list');
+  const items = wrap.querySelectorAll('.qa');
+  let shown = 0;
+  items.forEach(el=>{
+    const match = el.dataset.q.includes(q) || el.textContent.toLowerCase().includes(q);
+    el.style.display = match ? '' : 'none';
+    if(match) shown++;
+  });
+  document.getElementById(containerId+'-count').textContent = val ? `${shown} of ${items.length} match` : '';
+};
+
+// Overview
+main.innerHTML += `<section class="panel active" id="panel-overview">
+  <h2 class="section-title">Situation Brief</h2>
+  <p class="section-sub">Pulled from current public listings and recent candidate reports — treat as directional, confirm specifics with your recruiter contact.</p>
+  <div class="grid-cards">${OVERVIEW_CARDS.map(c=>`<div class="card"><div class="card-num">${c.n}</div><div class="card-lbl">${c.l}</div></div>`).join('')}</div>
+
+  <h2 class="section-title" style="font-size:16px;">What Hexaware's own listings say this role wants</h2>
+  <div class="kv">
+    <div>Core stack</div><div>Java (8 or 17+), Spring / Spring Boot, REST APIs, Microservices</div>
+    <div>ORM</div><div>JPA / Hibernate</div>
+    <div>Containers</div><div>Docker, often Kubernetes for deployment</div>
+    <div>Cloud</div><div>AWS or Azure exposure frequently listed (PaaS services, API Gateway, Lambda/Functions) — worth a one-line mention of any cloud exposure you have</div>
+    <div>Experience band</div><div>Comparable recent Hyderabad listings for this stack specify 5–7 years</div>
+  </div>
+
+  <div class="callout"><b>Your edge:</b> your existing Kafka/event-driven, observability, and banking-domain (UPI/NACH/SWIFT/RBI, PCI-DSS) depth maps almost directly onto what a client-facing IT services firm like Hexaware staffs backend engineers against. Lead with that domain fluency — it's rarer than generic Spring Boot familiarity.</div>
+
+  <h2 class="section-title" style="font-size:16px; margin-top:26px;">Typical process for an experienced (non-fresher) walk-in</h2>
+  <div class="two-col">
+    <div class="day" style="margin:0;">
+      <div class="day-head"><span class="dnum">1</span><h3>Resume screening / walk-in registration</h3></div>
+      <ul><li>On-the-spot resume review; shortlist called in for technical round same day</li></ul>
+    </div>
+    <div class="day" style="margin:0;">
+      <div class="day-head"><span class="dnum">2</span><h3>Technical round(s)</h3></div>
+      <ul><li>Domain-focused discussion: Java, Spring Boot, microservices, project deep-dive. Sometimes 2 back-to-back rounds (tech + architecture) for senior profiles rather than a written test</li></ul>
+    </div>
+    <div class="day" style="margin:0;">
+      <div class="day-head"><span class="dnum">3</span><h3>HR / managerial round</h3></div>
+      <ul><li>Fit, CTC discussion, notice period, relocation if applicable</li></ul>
+    </div>
+    <div class="day" style="margin:0;">
+      <div class="day-head"><span class="dnum">4</span><h3>Offer / follow-up</h3></div>
+      <ul><li>For walk-ins, verbal outcome or next-step timeline is often shared same day or within a few days</li></ul>
+    </div>
+  </div>
+  <div class="callout teal">Note: this differs from the fresher/GET pipeline (aptitude test → GD → tech → HR) — at 5-7 yrs experience you should expect the process to skip aptitude/GD and go straight into a technical conversation. Confirm with the recruiter when you register, since formats vary by drive.</div>
+</section>`;
+
+// 7-Day plan
+let planHtml = `<h2 class="section-title">7-Day Plan</h2><p class="section-sub">Built backward from your interview day. Days compress if your actual date is different — keep the order, adjust the pacing.</p>`;
+DAY_PLAN.forEach(d=>{
+  planHtml += `<div class="day">
+    <div class="day-head"><span class="dnum">${d.d}</span><h3>${d.title}</h3></div>
+    <ul>${d.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+  </div>`;
+});
+main.innerHTML += `<section class="panel" id="panel-plan">${planHtml}</section>`;
+
+// Java
+main.innerHTML += `<section class="panel" id="panel-java">
+  <h2 class="section-title">Core Java</h2>
+  <p class="section-sub">Weighted toward what recent Hexaware Java-backend interview reports (5-8 yr band) actually asked, plus standard concurrency depth for a senior profile.</p>
+  ${qaSection(CORE_JAVA, 'java')}
+</section>`;
+
+// Spring
+main.innerHTML += `<section class="panel" id="panel-spring">
+  <h2 class="section-title">Spring / Spring Boot</h2>
+  <p class="section-sub">The @Transactional and resilience questions are where mid-level candidates typically thin out — spend extra time there.</p>
+  ${qaSection(SPRING_BOOT, 'spring')}
+</section>`;
+
+// Microservices
+main.innerHTML += `<section class="panel" id="panel-micro">
+  <h2 class="section-title">Microservices</h2>
+  <p class="section-sub">This is your strongest ground given your day job — treat these as a chance to differentiate, not just clear the bar.</p>
+  ${qaSection(MICROSERVICES, 'micro')}
+</section>`;
+
+// System design
+main.innerHTML += `<section class="panel" id="panel-design">
+  <h2 class="section-title">System Design & Project Discussion</h2>
+  <p class="section-sub">For experienced walk-ins, this segment usually carries more weight than pure trivia — plan your time accordingly.</p>
+  ${qaSection(SYSTEM_DESIGN, 'design')}
+</section>`;
+
+// Behavioral
+main.innerHTML += `<section class="panel" id="panel-behavioral">
+  <h2 class="section-title">Behavioral / HR Round</h2>
+  <p class="section-sub">Short, concrete, rehearsed answers beat long improvised ones in a walk-in's compressed timeline.</p>
+  ${qaSection(BEHAVIORAL, 'behavioral')}
+</section>`;
+
+// Checklist
+let checklistHtml = `<h2 class="section-title">Day-Of Checklist</h2>
+<p class="section-sub">Tick as you go — progress resets if you reload the page, so do this the night before / morning of.</p>
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+  <div class="progress-pct" id="progPct">0%</div>
+</div>
+<h3 style="font-size:14px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em; margin:20px 0 10px;">Documents to carry</h3>
+<div class="checklist" id="checklist">`;
+CHECKLIST_DOCS.forEach((c,i)=>{
+  checklistHtml += `<div class="check-item" id="ci-doc-${i}">
+    <input type="checkbox" id="cb-doc-${i}" onchange="toggleCheck('doc-${i}')">
+    <label for="cb-doc-${i}">${c}</label>
+  </div>`;
+});
+checklistHtml += `</div>
+<h3 style="font-size:14px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em; margin:20px 0 10px;">Logistics</h3>
+<div class="checklist" id="checklist2">`;
+CHECKLIST_LOGISTICS.forEach((c,i)=>{
+  checklistHtml += `<div class="check-item" id="ci-log-${i}">
+    <input type="checkbox" id="cb-log-${i}" onchange="toggleCheck('log-${i}')">
+    <label for="cb-log-${i}">${c}</label>
+  </div>`;
+});
+checklistHtml += `</div>`;
+main.innerHTML += `<section class="panel" id="panel-checklist">${checklistHtml}</section>`;
+
+const TOTAL_CHECKS = CHECKLIST_DOCS.length + CHECKLIST_LOGISTICS.length;
+let checkedCount = 0;
+window.toggleCheck = function(key){
+  const row = document.getElementById('ci-'+key);
+  const cb = document.getElementById('cb-'+key);
+  row.classList.toggle('checked', cb.checked);
+  checkedCount = document.querySelectorAll('.checklist input:checked').length;
+  const pct = Math.round((checkedCount/TOTAL_CHECKS)*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progPct').textContent = pct+'%';
+};
+
+/* ============================= COUNTDOWN ============================= */
+function updateCountdown(){
+  const now = new Date();
+  const diffMs = TARGET_DATE - now;
+  const cdNum = document.getElementById('cdNum');
+  const cdLbl = document.getElementById('cdLbl');
+  if(diffMs <= 0){
+    cdNum.textContent = "GO";
+    cdLbl.textContent = "interview day";
+    return;
+  }
+  const days = Math.floor(diffMs / (1000*60*60*24));
+  const hours = Math.floor((diffMs % (1000*60*60*24)) / (1000*60*60));
+  if(days > 0){
+    cdNum.textContent = days;
+    cdLbl.textContent = days === 1 ? "day to walk-in" : "days to walk-in";
+  } else {
+    cdNum.textContent = hours;
+    cdLbl.textContent = "hours to walk-in";
+  }
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+</script>
+</body>
+</html>
